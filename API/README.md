@@ -5,10 +5,10 @@ The **besmart.energy** platform provides customers with API functionalities base
 ## HTTP methods
 API endpoints can use the following HTTP methods:
 
-- GET: used to retrieve data, all GET methods can be called multiple times as they do not modify any **besmart.energy** resources,
-- POST: used to create a new resource (e.g. create a new sensor),
-- PUT: used for editing the resource (e.g. editing the sensor description),
-- DELETE: used to delete resources.
+* GET: used to retrieve data, all GET methods can be called multiple times as they do not modify any **besmart.energy** resources,
+* POST: used to create a new resource (e.g. create a new sensor),
+* PUT: used for editing the resource (e.g. editing the sensor description),
+* DELETE: used to delete resources.
 
 ## Communication protocol
 
@@ -41,9 +41,9 @@ All metering data related to power or energy is represented as a double number i
 Timestamps for metering data are represented in UNIX time format with millisecond precision (it is possible to pass higher precision after the decimal point).
 
 In addition, each measurement data is marked with the 'origin' flag, which signifies the origin of the data:
-- '1' - means measured real data
-- '2' - means the predicted data
-- '3' - means calculated data
+* '1' - means measured real data
+* '2' - means the predicted data
+* '3' - means calculated data
 
 Therefore, the JSON structure representing a single measurement data has the following format, e.g .:
 
@@ -55,9 +55,9 @@ Therefore, the JSON structure representing a single measurement data has the fol
        }
 
 which means:
-- measured real data,
-- timestamp for Friday, January 1, 2021 03\:00\:00 UTC time (Friday, January 1, 2021 04\:00\:00 GMT + 01\:00 local winter time in Poland),
-- with a value of 3.50 of type double.
+* measured real data,
+* timestamp for Friday, January 1, 2021 03\:00\:00 UTC time (Friday, January 1, 2021 04\:00\:00 GMT + 01\:00 local winter time in Poland),
+* with a value of 3.50 of type double.
 
 In a special case, the PUT method can be used both for entering new data and for 'deleting' (marking data as deleted) of existing data.
 
