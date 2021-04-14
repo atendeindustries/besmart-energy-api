@@ -81,6 +81,6 @@ can be used to enter new data into the database, while:
 it will mean marking data as 'deleted' (special meaning of "type" tag with "RM" = remove).
 
 ## See also
-1. [Table of Contents](README.md)
-2. [Authentication](API/authentication.md)
-3. [Basic API endpoints](API/besmart_api.md)
+1. [Table of Contents](../README.md)
+2. [Authentication](authentication.md)
+3. [Basic API endpoints](besmart_api.md)
