@@ -6,8 +6,6 @@
 
 Base URLs:
 
-* <a href="/api">/api</a>
-
 * <a href="https://api.besmart.energy/api">https://api.besmart.energy/api</a>
 
 # Authentication
@@ -26,8 +24,8 @@ Base URLs:
 > Code samples
 
 ```http
-POST /api/users/token HTTP/1.1
-
+POST https://api.besmart.energy/api/users/token HTTP/1.1
+Host: api.besmart.energy
 Content-Type: text/plain
 Accept: application/json
 
@@ -41,7 +39,7 @@ headers = {
   'X-Auth': 'API_KEY'
 }
 
-r = requests.post('/api/users/token', headers = headers)
+r = requests.post('https://api.besmart.energy/api/users/token', headers = headers)
 
 print(r.json())
 
@@ -118,8 +116,8 @@ ApiKeyAuth
 > Code samples
 
 ```http
-GET /api/workspaces HTTP/1.1
-
+GET https://api.besmart.energy/api/workspaces HTTP/1.1
+Host: api.besmart.energy
 Accept: application/json
 
 ```
@@ -131,7 +129,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('/api/workspaces', headers = headers)
+r = requests.get('https://api.besmart.energy/api/workspaces', headers = headers)
 
 print(r.json())
 
@@ -209,8 +207,8 @@ BearerAuth
 > Code samples
 
 ```http
-GET /api/sensors/find HTTP/1.1
-
+GET https://api.besmart.energy/api/sensors/find HTTP/1.1
+Host: api.besmart.energy
 Accept: application/json
 
 ```
@@ -222,7 +220,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('/api/sensors/find', headers = headers)
+r = requests.get('https://api.besmart.energy/api/sensors/find', headers = headers)
 
 print(r.json())
 
@@ -323,8 +321,8 @@ BearerAuth
 > Code samples
 
 ```http
-POST /api/sensors/external HTTP/1.1
-
+POST https://api.besmart.energy/api/sensors/external HTTP/1.1
+Host: api.besmart.energy
 Content-Type: text/plain
 Accept: application/json
 
@@ -338,7 +336,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('/api/sensors/external', headers = headers)
+r = requests.post('https://api.besmart.energy/api/sensors/external', headers = headers)
 
 print(r.json())
 
@@ -445,8 +443,8 @@ BearerAuth
 > Code samples
 
 ```http
-GET /api/sensors/signals/types HTTP/1.1
-
+GET https://api.besmart.energy/api/sensors/signals/types HTTP/1.1
+Host: api.besmart.energy
 Accept: application/json
 
 ```
@@ -458,7 +456,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('/api/sensors/signals/types', headers = headers)
+r = requests.get('https://api.besmart.energy/api/sensors/signals/types', headers = headers)
 
 print(r.json())
 
@@ -520,8 +518,8 @@ BearerAuth
 > Code samples
 
 ```http
-PUT /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data HTTP/1.1
-
+PUT https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data HTTP/1.1
+Host: api.besmart.energy
 Content-Type: text/plain
 Accept: application/json
 
@@ -535,7 +533,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.put('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', headers = headers)
+r = requests.put('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', headers = headers)
 
 print(r.json())
 
