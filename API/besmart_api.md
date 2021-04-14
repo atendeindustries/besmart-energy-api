@@ -6,6 +6,8 @@
 
 Base URLs:
 
+* <a href="/api">/api</a>
+
 * <a href="https://api.besmart.energy/api">https://api.besmart.energy/api</a>
 
 # Authentication
@@ -24,8 +26,8 @@ Base URLs:
 > Code samples
 
 ```http
-POST https://api.besmart.energy/api/users/token HTTP/1.1
-Host: api.besmart.energy
+POST /api/users/token HTTP/1.1
+
 Content-Type: text/plain
 Accept: application/json
 
@@ -39,7 +41,7 @@ headers = {
   'X-Auth': 'API_KEY'
 }
 
-r = requests.post('https://api.besmart.energy/api/users/token', headers = headers)
+r = requests.post('/api/users/token', headers = headers)
 
 print(r.json())
 
@@ -50,8 +52,7 @@ print(r.json())
 > Body parameter
 
 ```
-login: login
-password: password
+'{ "login": "login", "password": "password" }'
 
 ```
 
@@ -117,8 +118,8 @@ ApiKeyAuth
 > Code samples
 
 ```http
-GET https://api.besmart.energy/api/workspaces HTTP/1.1
-Host: api.besmart.energy
+GET /api/workspaces HTTP/1.1
+
 Accept: application/json
 
 ```
@@ -130,7 +131,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('https://api.besmart.energy/api/workspaces', headers = headers)
+r = requests.get('/api/workspaces', headers = headers)
 
 print(r.json())
 
@@ -208,8 +209,8 @@ BearerAuth
 > Code samples
 
 ```http
-GET https://api.besmart.energy/api/sensors/find HTTP/1.1
-Host: api.besmart.energy
+GET /api/sensors/find HTTP/1.1
+
 Accept: application/json
 
 ```
@@ -221,7 +222,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('https://api.besmart.energy/api/sensors/find', headers = headers)
+r = requests.get('/api/sensors/find', headers = headers)
 
 print(r.json())
 
@@ -322,8 +323,8 @@ BearerAuth
 > Code samples
 
 ```http
-POST https://api.besmart.energy/api/sensors/external HTTP/1.1
-Host: api.besmart.energy
+POST /api/sensors/external HTTP/1.1
+
 Content-Type: text/plain
 Accept: application/json
 
@@ -337,7 +338,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('https://api.besmart.energy/api/sensors/external', headers = headers)
+r = requests.post('/api/sensors/external', headers = headers)
 
 print(r.json())
 
@@ -348,7 +349,7 @@ print(r.json())
 > Body parameter
 
 ```
-string
+'["1", "ex12"]'
 
 ```
 
@@ -444,8 +445,8 @@ BearerAuth
 > Code samples
 
 ```http
-GET https://api.besmart.energy/api/sensors/signals/types HTTP/1.1
-Host: api.besmart.energy
+GET /api/sensors/signals/types HTTP/1.1
+
 Accept: application/json
 
 ```
@@ -457,7 +458,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('https://api.besmart.energy/api/sensors/signals/types', headers = headers)
+r = requests.get('/api/sensors/signals/types', headers = headers)
 
 print(r.json())
 
@@ -470,7 +471,19 @@ print(r.json())
 > 200 Response
 
 ```json
-"None"
+[
+  {
+    "signal_type_moid": 32,
+    "symbol": "A+",
+    "is_incremental": true,
+    "description": "Energia czynna pobrana z sieci",
+    "unit_id": 1,
+    "unit_symbol": "kW.h",
+    "group_id": 2,
+    "group": "Energetyka",
+    "obis_mapping": "None"
+  }
+]
 ```
 
 <h3 id="get-signals-types-responses">Responses</h3>
@@ -483,25 +496,33 @@ print(r.json())
 
 Status Code **200**
 
-*List of signals types*
-
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|» signal_type_moid|string|false|none|none|
+|» symbol|string|false|none|none|
+|» is_incremental|boolean|false|none|none|
+|» description|string|false|none|none|
+|» unit_id|integer|false|none|none|
+|» unit_symbol|string|false|none|none|
+|» group_id|integer|false|none|none|
+|» group|string|false|none|none|
+|» obis_mapping|string|false|none|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 BearerAuth
 </aside>
 
-## Get signal data
+## Put signal data
 
-<a id="opIdapi.endpoints.sensors.get_id_signals_id_data"></a>
+<a id="opIdapi.endpoints.sensors.put_id_signals_id_data"></a>
 
 > Code samples
 
 ```http
-GET https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1577836800000&till=1580515200000 HTTP/1.1
-Host: api.besmart.energy
+PUT /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data HTTP/1.1
+
+Content-Type: text/plain
 Accept: application/json
 
 ```
@@ -509,101 +530,52 @@ Accept: application/json
 ```python
 import requests
 headers = {
+  'Content-Type': 'text/plain',
   'Accept': 'application/json',
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1577836800000',  'till': '1580515200000'
-}, headers = headers)
+r = requests.put('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', headers = headers)
 
 print(r.json())
 
 ```
 
-`GET /sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data`
+`PUT /sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data`
 
-<h3 id="get-signal-data-parameters">Parameters</h3>
+> Body parameter
+
+```
+'[ { "origin": 1, "time": 1609455600000, "type": "DBL", "value": 10.02 } ]'
+
+```
+
+<h3 id="put-signal-data-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
 |signal_type_moid|path|integer|true|Signal type MOID|
-|since|query|integer|true|Start date (UTC unix timestamp)|
-|till|query|integer|true|End date (UTC unix timestamp)|
-|delta_t|query|integer|false|Aggregate time (in minutes)|
-|raw|query|boolean|false|Fetch raw signal|
-|output_unit_id|query|integer|false|Output unit id|
-|signal_origin_id|query|integer|false|Signal origin id|
+|body|body|string|true|none|
 
 > Example responses
 
 > 200 Response
 
 ```json
-{
-  "client_cid": 12,
-  "sensor_mid": 122,
-  "signal_type_moid": 32,
-  "data": [
-    {
-      "time": 1577836800000,
-      "value": 10.01,
-      "type": "DBL",
-      "origin": 1
-    }
-  ],
-  "unit": "kW.h"
-}
+"OK"
 ```
 
-<h3 id="get-signal-data-responses">Responses</h3>
+<h3 id="put-signal-data-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read signal data|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated signal data|string|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
 
-<h3 id="get-signal-data-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» client_cid|integer|false|none|none|
-|» sensor_mid|integer|false|none|none|
-|» signal_type_moid|integer|false|none|none|
-|» data|[object]|false|none|none|
-|»» time|integer|false|none|Timestamp in UTC in ms|
-|»» value|any|false|none|Value|
-
-*oneOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|string|false|none|none|
-
-*xor*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|integer|false|none|none|
-
-*xor*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|number|false|none|none|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»» type|string|false|none|Data type name|
-|»» origin|integer|false|none|Data origin|
-|» unit|string|false|none|Data unit|
+<h3 id="put-signal-data-responseschema">Response Schema</h3>
 
 Status Code **401**
 
