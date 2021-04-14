@@ -19,3 +19,7 @@ The app requires two-factor authentication:
 2. In ordering any other endpoint, the temporary session token generated in step 1 must be entered in the <code>Authorization</code> header field:
 
         Authorization: Bearer temporary_session_token
+
+## See also
+1. [Table of Contents](README.md)
+2. [Basic API endpoints](API/besmart_api.md)
