@@ -58,7 +58,7 @@ Therefore, the JSON structure representing a single measurement data has the fol
 which means:
 
 * measured real data,
-* timestamp for Friday, January 1, 2021 03:00\:00 UTC time (Friday, January 1, 2021 04\:00\:00 GMT + 01\:00 local winter time in Poland),
+* timestamp for Friday, January 1, 2021 03:00:00 UTC time (Friday, January 1, 2021 04:00:00 GMT + 01:00 local winter time in Poland),
 * with a value of 3.50 of type double.
 
 In a special case, the PUT method can be used both for entering new data and for 'deleting' (marking data as deleted) of existing data.
