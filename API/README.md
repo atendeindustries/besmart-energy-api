@@ -41,6 +41,7 @@ All metering data related to power or energy is represented as a double number i
 Timestamps for metering data are represented in UNIX time format with millisecond precision (it is possible to pass higher precision after the decimal point).
 
 In addition, each measurement data is marked with the 'origin' flag, which signifies the origin of the data:
+
 * '1' - means measured real data
 * '2' - means the predicted data
 * '3' - means calculated data
