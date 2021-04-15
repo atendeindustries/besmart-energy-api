@@ -5,6 +5,7 @@ All REST API resource requests require an authorization token to be passed in th
 The **besmart.energy** system requires two-factor authentication:
 The app requires two-factor authentication:
 
+
 1. In the first step, based on the token associated with a given application workspace (<code>workspace_token</code> to be downloaded for workspace administrators using the application), you should download a temporary individually generated token (valid for 2 hours).<br>The endpoint [https://api.besmart.energy/api/users/token](https://api.besmart.energy/api/users/token) is used for this. In the POST method the authorization parameters should be passed:
 
         {
