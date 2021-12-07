@@ -235,6 +235,7 @@ print(r.json())
 |client_cid|query|integer|false|Client ID|
 |sensor_type_id|query|integer|false|Sensor type ID|
 |name|query|string|false|Sensor name|
+|meter_eid|query|string|false|Current meter serial number|
 |columns|query|string|false|Column names to return|
 
 > Example responses
@@ -249,6 +250,7 @@ print(r.json())
     "address_postcode": "00-020",
     "address_street": "Wiejska",
     "address_street_number": "36",
+    "comments": "Licznik do likwidacji.",
     "client_cid": 1,
     "sensor_mid": 1,
     "ppe": "PL123123123123",
@@ -285,6 +287,7 @@ Status Code **200**
 |» address_postcode|string|false|none|none|
 |» address_street|string|false|none|none|
 |» address_street_number|string|false|none|none|
+|» comments|string|false|none|none|
 |» client_cid|integer|false|none|none|
 |» sensor_mid|integer|false|none|none|
 |» ppe|string|false|none|none|
@@ -369,6 +372,7 @@ print(r.json())
     "address_postcode": "00-020",
     "address_street": "Wiejska",
     "address_street_number": "36",
+    "comments": "Licznik do likwidacji.",
     "client_cid": 1,
     "sensor_mid": 1,
     "ppe": "PL123123123123",
@@ -405,6 +409,7 @@ Status Code **200**
 |» address_postcode|string|false|none|none|
 |» address_street|string|false|none|none|
 |» address_street_number|string|false|none|none|
+|» comments|string|false|none|none|
 |» client_cid|integer|false|none|none|
 |» sensor_mid|integer|false|none|none|
 |» ppe|string|false|none|none|
@@ -544,7 +549,7 @@ print(r.json())
 > Body parameter
 
 ```
-'[ { "origin": 1, "time": 1609455600000, "type": "DBL", "value": 10.02 } ]'
+'{ "origin": [1], "time": [1609455600000], "type": ["DBL"], "value": [10.02] }'
 
 ```
 
