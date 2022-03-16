@@ -516,6 +516,137 @@ To perform this operation, you must be authenticated by means of one of the foll
 BearerAuth
 </aside>
 
+## Get signal data
+
+<a id="opIdapi.endpoints.sensors.get_id_signals_id_data"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1577836800000&till=1580515200000 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
+  'since': '1577836800000',  'till': '1580515200000'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data`
+
+<h3 id="get-signal-data-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client CID|
+|sensor_mid|path|integer|true|Sensor MID|
+|signal_type_moid|path|integer|true|Signal type MOID|
+|since|query|number|true|Start date (UTC unix timestamp)|
+|till|query|number|true|End date (UTC unix timestamp)|
+|get_last|query|boolean|false|Get only records with newest acq time for the same cap times|
+|delta_t|query|integer|false|Aggregate time (in minutes)|
+|raw|query|boolean|false|Fetch raw signal|
+|output_unit_id|query|integer|false|Output unit id|
+|signal_origin_id|query|integer|false|Signal origin id|
+|filters|query|string|false|Data filters for complex stuctures|
+|is_chart|query|bool|false|Use expected chart output unit|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "client_cid": 12,
+  "sensor_mid": 122,
+  "signal_type_moid": 32,
+  "data": [
+    {
+      "time": 1577836800000,
+      "value": 10.01,
+      "type": "DBL",
+      "origin": 1
+    }
+  ],
+  "unit": "kW.h"
+}
+```
+
+<h3 id="get-signal-data-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read signal data|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
+
+<h3 id="get-signal-data-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» signal_type_moid|integer|false|none|none|
+|» data|[object]|false|none|none|
+|»» time|integer|false|none|Timestamp in UTC in ms|
+|»» value|any|false|none|Value|
+
+*oneOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|string|false|none|none|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|integer|false|none|none|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|number|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»» type|string|false|none|Data type name|
+|»» origin|integer|false|none|Data origin|
+|» unit|string|false|none|Data unit|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
 ## Put signal data
 
 <a id="opIdapi.endpoints.sensors.put_id_signals_id_data"></a>
