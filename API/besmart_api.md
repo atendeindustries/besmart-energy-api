@@ -572,14 +572,20 @@ print(r.json())
   "client_cid": 12,
   "sensor_mid": 122,
   "signal_type_moid": 32,
-  "data": [
-    {
-      "time": 1577836800000,
-      "value": 10.01,
-      "type": "DBL",
-      "origin": 1
-    }
-  ],
+  "data": {
+    "time": [
+      1577836800000
+    ],
+    "value": [
+      10.01
+    ],
+    "type": [
+      "DBL"
+    ],
+    "origin": [
+      1
+    ]
+  },
   "unit": "kW.h"
 }
 ```
@@ -601,9 +607,9 @@ Status Code **200**
 |» client_cid|integer|false|none|none|
 |» sensor_mid|integer|false|none|none|
 |» signal_type_moid|integer|false|none|none|
-|» data|[object]|false|none|none|
-|»» time|integer|false|none|Timestamp in UTC in ms|
-|»» value|any|false|none|Value|
+|» data|object|false|none|none|
+|»» time|[integer]|false|none|none|
+|»» value|[oneOf]|false|none|none|
 
 *oneOf*
 
@@ -627,8 +633,8 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»» type|string|false|none|Data type name|
-|»» origin|integer|false|none|Data origin|
+|»» type|[string]|false|none|none|
+|»» origin|[integer]|false|none|none|
 |» unit|string|false|none|Data unit|
 
 Status Code **401**
