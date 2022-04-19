@@ -200,6 +200,88 @@ BearerAuth
 
 <h1 id="besmart-rest-api-sensors">Sensors</h1>
 
+## Create new sensor
+
+<a id="opIdapi.endpoints.sensors.post"></a>
+
+> Code samples
+
+```http
+POST https://api.besmart.energy/api/sensors?name=Electric%20meter%20no%20123 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('https://api.besmart.energy/api/sensors', params={
+  'name': 'Electric meter no 123'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`POST /sensors`
+
+<h3 id="create-new-sensor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|query|string|true|Name of the sensor|
+|sensor_type_id|query|integer|false|Sensor type ID|
+|client_cid|query|integer|false|Client CID|
+|uncertain|query|boolean|false|none|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "id": 12
+}
+```
+
+<h3 id="create-new-sensor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created sensor|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+
+<h3 id="create-new-sensor-responseschema">Response Schema</h3>
+
+Status Code **201**
+
+*Created sensor ID*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» id|integer|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
 ## Get sensors
 
 <a id="opIdapi.endpoints.sensors.get_find"></a>
@@ -439,6 +521,431 @@ To perform this operation, you must be authenticated by means of one of the foll
 BearerAuth
 </aside>
 
+## Get list of sensor types
+
+<a id="opIdapi.endpoints.sensors.get_types"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/types HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/types', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/types`
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "description": "Wirtualny",
+    "id": 1,
+    "name": "virtual"
+  }
+]
+```
+
+<h3 id="get-list-of-sensor-types-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read sensor types|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Valid authentication credentials|Inline|
+
+<h3 id="get-list-of-sensor-types-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*List of sensor types*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» description|string|false|none|none|
+|» id|integer|false|none|none|
+|» name|string|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get list of meter types
+
+<a id="opIdapi.endpoints.sensors.get_meters"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/meters HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/meters', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/meters`
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "id": 0,
+    "meter_type_name": "string",
+    "description": "string",
+    "number_of_phases": 0,
+    "is_balance": true,
+    "is_ami": "string"
+  }
+]
+```
+
+<h3 id="get-list-of-meter-types-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read meter types|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Valid authentication credentials|Inline|
+
+<h3 id="get-list-of-meter-types-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*List of meter types*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» id|integer|false|none|none|
+|» meter_type_name|string|false|none|none|
+|» description|string|false|none|none|
+|» number_of_phases|integer|false|none|none|
+|» is_balance|boolean|false|none|none|
+|» is_ami|string|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get sensor
+
+<a id="opIdapi.endpoints.sensors.get_id"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid} HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/{client_cid}.{sensor_mid}`
+
+<h3 id="get-sensor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client CID|
+|sensor_mid|path|integer|true|Sensor MID|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "address_city": "Warszawa",
+  "address_flat_number": "35",
+  "address_postcode": "00-020",
+  "address_street": "Wiejska",
+  "address_street_number": "36",
+  "comments": "Licznik do likwidacji.",
+  "client_cid": 1,
+  "sensor_mid": 1,
+  "ppe": "PL123123123123",
+  "lat": 53.13,
+  "lon": 22.06,
+  "name": "sensor name",
+  "owner": true,
+  "sensor_eid": "48003752B205900000",
+  "sensor_type_description": "Stacja",
+  "sensor_type_id": 12,
+  "sensor_type_name": "meter_station",
+  "write": true
+}
+```
+
+<h3 id="get-sensor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read sensor information|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Not valid id|string|
+
+<h3 id="get-sensor-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*Model containing sensor information*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» address_city|string|false|none|none|
+|» address_flat_number|string|false|none|none|
+|» address_postcode|string|false|none|none|
+|» address_street|string|false|none|none|
+|» address_street_number|string|false|none|none|
+|» comments|string|false|none|none|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» ppe|string|false|none|none|
+|» lat|number|false|none|none|
+|» lon|number|false|none|none|
+|» name|string|false|none|none|
+|» owner|boolean|false|none|none|
+|» sensor_eid|string|false|none|none|
+|» sensor_type_description|string|false|none|none|
+|» sensor_type_id|integer|false|none|none|
+|» sensor_type_name|string|false|none|none|
+|» write|boolean|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Update sensor
+
+<a id="opIdapi.endpoints.sensors.put_id"></a>
+
+> Code samples
+
+```http
+PUT https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid} HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}', headers = headers)
+
+print(r.json())
+
+```
+
+`PUT /sensors/{client_cid}.{sensor_mid}`
+
+<h3 id="update-sensor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client CID|
+|sensor_mid|path|integer|true|Sensor MID|
+|name|query|string|false|Name of the sensor|
+|sensor_type_id|query|integer|false|Sensor type ID|
+|ppe|query|string|false|PPE|
+|sensor_eid|query|string|false|Sensor external ID|
+|lat|query|number|false|Sensor latitude|
+|lon|query|number|false|Sensor longitude|
+|address_city|query|string|false|Address city|
+|address_postcode|query|string|false|Address city postcode|
+|address_street|query|string|false|Address street name|
+|address_street_number|query|string|false|Address street number|
+|address_flat_number|query|string|false|Address flat number|
+|comments|query|string|false|Comments|
+|uncertain|query|boolean|false|none|
+|negligible|query|boolean|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+"OK"
+```
+
+<h3 id="update-sensor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated sensor|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Not valid id|string|
+
+<h3 id="update-sensor-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Remove sensor
+
+<a id="opIdapi.endpoints.sensors.delete_id"></a>
+
+> Code samples
+
+```http
+DELETE https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid} HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('https://api.besmart.energy/api/sensors/{client_cid}.{sensor_mid}', headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /sensors/{client_cid}.{sensor_mid}`
+
+<h3 id="remove-sensor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client CID|
+|sensor_mid|path|integer|true|Sensor MID|
+
+> Example responses
+
+> 200 Response
+
+```json
+"OK"
+```
+
+<h3 id="remove-sensor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully removed sensor|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Not valid id|string|
+
+<h3 id="remove-sensor-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
 <h1 id="besmart-rest-api-signals">Signals</h1>
 
 ## Get signals types
@@ -510,6 +1017,485 @@ Status Code **200**
 |» group_id|integer|false|none|none|
 |» group|string|false|none|none|
 |» obis_mapping|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get sensor states
+
+<a id="opIdapi.endpoints.sensors.get_states"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/states?client_cid=1&sensor_mid=1 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/states', params={
+  'client_cid': '1',  'sensor_mid': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/states`
+
+<h3 id="get-sensor-states-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|query|integer|true|Client CID|
+|sensor_mid|query|integer|true|Sensor MID|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "sensor_state_id": 0,
+    "client_cid": 0,
+    "sensor_mid": 0,
+    "signal_states": [
+      {
+        "signal_state_id": 0,
+        "signal_type_moid": 0,
+        "value_for_since": 0,
+        "value_for_till": 0,
+        "info": "string"
+      }
+    ],
+    "since": 0,
+    "till": 0,
+    "meter_eid": "string",
+    "info": "string",
+    "meter_type_name": "string",
+    "meter_type_is_ami": true
+  }
+]
+```
+
+<h3 id="get-sensor-states-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read signals states|Inline|
+
+<h3 id="get-sensor-states-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» sensor_state_id|integer|false|none|none|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» signal_states|[object]|false|none|none|
+|»» signal_state_id|integer|false|none|none|
+|»» signal_type_moid|integer|false|none|none|
+|»» value_for_since|number|false|none|none|
+|»» value_for_till|number|false|none|none|
+|»» info|string|false|none|none|
+|» since|integer|false|none|none|
+|» till|integer|false|none|none|
+|» meter_eid|string|false|none|none|
+|» info|string|false|none|none|
+|» meter_type_name|string|false|none|none|
+|» meter_type_is_ami|boolean|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Create sensor state
+
+<a id="opIdapi.endpoints.sensors.post_states"></a>
+
+> Code samples
+
+```http
+POST https://api.besmart.energy/api/sensors/states?client_cid=1&sensor_mid=1&since=1577836800000 HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('https://api.besmart.energy/api/sensors/states', params={
+  'client_cid': '1',  'sensor_mid': '1',  'since': '1577836800000'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`POST /sensors/states`
+
+<h3 id="create-sensor-state-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|query|integer|true|Client CID|
+|sensor_mid|query|integer|true|Sensor MID|
+|since|query|number|true|Start date (UTC unix timestamp)|
+|till|query|number|false|End date (UTC unix timestamp)|
+|info|query|string|false|Additional informations|
+|meter_eid|query|string|false|Meter external ID|
+|meter_type_name|query|string|false|Meter type name|
+
+<h3 id="create-sensor-state-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created state|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Update sensor state
+
+<a id="opIdapi.endpoints.sensors.put_states_id"></a>
+
+> Code samples
+
+```http
+PUT https://api.besmart.energy/api/sensors/states/{sensor_state_id} HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('https://api.besmart.energy/api/sensors/states/{sensor_state_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`PUT /sensors/states/{sensor_state_id}`
+
+<h3 id="update-sensor-state-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sensor_state_id|path|integer|true|State ID|
+|since|query|integer|false|Start date (UTC unix timestamp)|
+|till|query|integer|false|End date (UTC unix timestamp)|
+|info|query|string|false|Additional informations|
+|meter_eid|query|string|false|Meter external ID|
+|meter_type_name|query|string|false|Meter type name|
+
+<h3 id="update-sensor-state-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Updated state|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Delete sensor state
+
+<a id="opIdapi.endpoints.sensors.delete_states_id"></a>
+
+> Code samples
+
+```http
+DELETE https://api.besmart.energy/api/sensors/states/{sensor_state_id} HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('https://api.besmart.energy/api/sensors/states/{sensor_state_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /sensors/states/{sensor_state_id}`
+
+<h3 id="delete-sensor-state-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sensor_state_id|path|integer|true|State ID|
+
+<h3 id="delete-sensor-state-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Removed state|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Create sensor state for signal
+
+<a id="opIdapi.endpoints.sensors.post_states_id_signals"></a>
+
+> Code samples
+
+```http
+POST https://api.besmart.energy/api/sensors/states/{sensor_state_id}/signals?signal_type_moid=1 HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('https://api.besmart.energy/api/sensors/states/{sensor_state_id}/signals', params={
+  'signal_type_moid': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`POST /sensors/states/{sensor_state_id}/signals`
+
+<h3 id="create-sensor-state-for-signal-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sensor_state_id|path|integer|true|State ID|
+|signal_type_moid|query|integer|true|Signal type moid|
+|value_for_since|query|string|false|Value for state start|
+|value_for_till|query|string|false|Value for state end|
+|info|query|string|false|Additional informations|
+
+<h3 id="create-sensor-state-for-signal-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created state for signal|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get sensor states for signal
+
+<a id="opIdapi.endpoints.sensors.get_states_signals"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/sensors/states/signals?client_cid=1&sensor_mid=1&signal_type_moid=1 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/sensors/states/signals', params={
+  'client_cid': '1',  'sensor_mid': '1',  'signal_type_moid': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /sensors/states/signals`
+
+<h3 id="get-sensor-states-for-signal-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|query|integer|true|Client CID|
+|sensor_mid|query|integer|true|Sensor MID|
+|signal_type_moid|query|integer|true|Signal type MOID|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "sensor_state_id": 0,
+    "client_cid": 0,
+    "sensor_mid": 0,
+    "signal_states": [
+      {
+        "signal_state_id": 0,
+        "signal_type_moid": 0,
+        "value_for_since": 0,
+        "value_for_till": 0,
+        "info": "string"
+      }
+    ],
+    "since": 0,
+    "till": 0,
+    "meter_eid": "string",
+    "info": "string",
+    "meter_type_name": "string",
+    "meter_type_is_ami": true
+  }
+]
+```
+
+<h3 id="get-sensor-states-for-signal-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read signals states for signal|Inline|
+
+<h3 id="get-sensor-states-for-signal-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» sensor_state_id|integer|false|none|none|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» signal_states|[object]|false|none|none|
+|»» signal_state_id|integer|false|none|none|
+|»» signal_type_moid|integer|false|none|none|
+|»» value_for_since|number|false|none|none|
+|»» value_for_till|number|false|none|none|
+|»» info|string|false|none|none|
+|» since|integer|false|none|none|
+|» till|integer|false|none|none|
+|» meter_eid|string|false|none|none|
+|» info|string|false|none|none|
+|» meter_type_name|string|false|none|none|
+|» meter_type_is_ami|boolean|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Update sensor state for signal
+
+<a id="opIdapi.endpoints.sensors.put_states_signals_id"></a>
+
+> Code samples
+
+```http
+PUT https://api.besmart.energy/api/sensors/states/signals/{signal_state_id} HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('https://api.besmart.energy/api/sensors/states/signals/{signal_state_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`PUT /sensors/states/signals/{signal_state_id}`
+
+<h3 id="update-sensor-state-for-signal-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|signal_state_id|path|integer|true|Signal state ID|
+|value_for_since|query|string|false|Value for state start|
+|value_for_till|query|string|false|Value for state end|
+|info|query|string|false|Additional informations|
+
+<h3 id="update-sensor-state-for-signal-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Updated state for signal|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Delete sensor state for signal
+
+<a id="opIdapi.endpoints.sensors.delete_states_signals_id"></a>
+
+> Code samples
+
+```http
+DELETE https://api.besmart.energy/api/sensors/states/signals/{signal_state_id} HTTP/1.1
+Host: api.besmart.energy
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('https://api.besmart.energy/api/sensors/states/signals/{signal_state_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /sensors/states/signals/{signal_state_id}`
+
+<h3 id="delete-sensor-state-for-signal-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|signal_state_id|path|integer|true|Signal state ID|
+
+<h3 id="delete-sensor-state-for-signal-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Removed state for signal|None|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
