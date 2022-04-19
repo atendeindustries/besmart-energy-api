@@ -198,6 +198,566 @@ To perform this operation, you must be authenticated by means of one of the foll
 BearerAuth
 </aside>
 
+## Create new workspace
+
+<a id="opIdapi.endpoints.workspaces.post"></a>
+
+> Code samples
+
+```http
+POST https://api.besmart.energy/api/workspaces?name=My%20workspace HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('https://api.besmart.energy/api/workspaces', params={
+  'name': 'My workspace'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`POST /workspaces`
+
+<h3 id="create-new-workspace-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|name|query|string|true|Name of the workspace|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "config": "workspace_1",
+  "descritpion": "My workspace",
+  "id": 21,
+  "name": "Złocieniec",
+  "owner": true,
+  "root_node_id": 263468,
+  "client_cid": 263429,
+  "sensor_mid": 263429,
+  "write": true
+}
+```
+
+<h3 id="create-new-workspace-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created workspace|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+
+<h3 id="create-new-workspace-responseschema">Response Schema</h3>
+
+Status Code **201**
+
+*Model containing workspace info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» config|string|false|none|none|
+|» descritpion|string|false|none|none|
+|» id|integer|false|none|none|
+|» name|string|false|none|none|
+|» owner|boolean|false|none|none|
+|» root_node_id|integer|false|none|none|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» write|boolean|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Remove workspace
+
+<a id="opIdapi.endpoints.workspaces.delete_id"></a>
+
+> Code samples
+
+```http
+DELETE https://api.besmart.energy/api/workspaces/{id} HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('https://api.besmart.energy/api/workspaces/{id}', headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /workspaces/{id}`
+
+<h3 id="remove-workspace-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|integer|true|Workspace ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+"OK"
+```
+
+<h3 id="remove-workspace-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully removed workspace|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
+
+<h3 id="remove-workspace-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get workspace tree
+
+<a id="opIdapi.endpoints.workspaces.get_id_tree"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/workspaces/tree HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/workspaces/tree', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /workspaces/tree`
+
+<h3 id="get-workspace-tree-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|parent_id|query|integer|false|Workspace parent node ID, should be empty or null if root is needed|
+|search|query|string|false|Search term|
+|offset|query|integer|false|Offset (records)|
+|limit|query|integer|false|Limit (records)|
+|child_id|query|integer|false|Child ID to find and load in tree|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "children": [],
+  "children_num": 0,
+  "more_children": false
+}
+```
+
+<h3 id="get-workspace-tree-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read workspace information|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+
+<h3 id="get-workspace-tree-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*Workspace subtree data*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» children|array|false|none|none|
+|» children_num|integer|false|none|none|
+|» more_children|boolean|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Create workspace tree node
+
+<a id="opIdapi.endpoints.workspaces.post_id_tree"></a>
+
+> Code samples
+
+```http
+POST https://api.besmart.energy/api/workspaces/tree?client_cid=1&sensor_mid=1&parent_id=1 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('https://api.besmart.energy/api/workspaces/tree', params={
+  'client_cid': '1',  'sensor_mid': '1',  'parent_id': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`POST /workspaces/tree`
+
+<h3 id="create-workspace-tree-node-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|query|integer|true|Sensor client CID|
+|sensor_mid|query|integer|true|Sensor MID|
+|parent_id|query|integer|true|Workspace tree parent node ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": 585540
+}
+```
+
+<h3 id="create-workspace-tree-node-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully created workspace tree node|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+
+<h3 id="create-workspace-tree-node-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*UID number*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» id|integer|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Update workspace tree node position
+
+<a id="opIdapi.endpoints.workspaces.put_id_tree"></a>
+
+> Code samples
+
+```http
+PUT https://api.besmart.energy/api/workspaces/tree?node_id=1 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('https://api.besmart.energy/api/workspaces/tree', params={
+  'node_id': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`PUT /workspaces/tree`
+
+<h3 id="update-workspace-tree-node-position-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|node_id|query|integer|true|Workspace tree node ID|
+|new_parent_id|query|integer|false|Workspace tree new parent node ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+"OK"
+```
+
+<h3 id="update-workspace-tree-node-position-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated workspace tree node position|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
+
+<h3 id="update-workspace-tree-node-position-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Remove workspace tree node
+
+<a id="opIdapi.endpoints.workspaces.delete_id_tree"></a>
+
+> Code samples
+
+```http
+DELETE https://api.besmart.energy/api/workspaces/tree?node_id=1 HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('https://api.besmart.energy/api/workspaces/tree', params={
+  'node_id': '1'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /workspaces/tree`
+
+<h3 id="remove-workspace-tree-node-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|node_id|query|integer|true|Workspace tree node ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+"OK"
+```
+
+<h3 id="remove-workspace-tree-node-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully removed workspace tree node|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
+
+<h3 id="remove-workspace-tree-node-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
+## Get workspace tree node
+
+<a id="opIdapi.endpoints.workspaces.get_id_tree_node_id"></a>
+
+> Code samples
+
+```http
+GET https://api.besmart.energy/api/workspaces/tree/{node_id} HTTP/1.1
+Host: api.besmart.energy
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('https://api.besmart.energy/api/workspaces/tree/{node_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /workspaces/tree/{node_id}`
+
+<h3 id="get-workspace-tree-node-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|node_id|path|integer|true|Workspace node ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "children_num": 0,
+  "more_children": false,
+  "name": "None",
+  "client_cid": 12,
+  "sensor_mid": 582029,
+  "sensor_type_id": 12,
+  "uid": 585541
+}
+```
+
+<h3 id="get-workspace-tree-node-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read workspace node information|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|None|
+
+<h3 id="get-workspace-tree-node-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+*Workspace node data*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» children_num|integer|false|none|none|
+|» more_children|boolean|false|none|none|
+|» name|string|false|none|none|
+|» client_cid|integer|false|none|none|
+|» sensor_mid|integer|false|none|none|
+|» sensor_type_id|integer|false|none|none|
+|» uid|integer|false|none|none|
+
+Status Code **401**
+
+*Model containing authorize problem info*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» detail|string|false|none|none|
+|» status|integer|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+BearerAuth
+</aside>
+
 <h1 id="besmart-rest-api-sensors">Sensors</h1>
 
 ## Create new sensor
