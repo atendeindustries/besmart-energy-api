@@ -1,4 +1,4 @@
-[besmart.energy](https://besmart.energy/) system is the cloud platform designed to manage energy communities: energy clusters, micro-grids and energy cooperatives.<br><br>
+[besmart.energy](https://besmart.energy/) system is the cloud platform designed to manage energy communities: energy clusters, micro-grids and energy cooperatives.<br>
 It offers a set of programming tools enabling easy usage. The exposed API can be used for integration with external systems.
 
 # Table of contents
