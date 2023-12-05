@@ -1076,7 +1076,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1701685963000&till=1701772363000 HTTP/1.1
+GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1701685961000&till=1701772361000 HTTP/1.1
 
 Accept: application/json
 
@@ -1090,7 +1090,7 @@ headers = {
 }
 
 r = requests.get('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1701685963000',  'till': '1701772363000'
+  'since': '1701685961000',  'till': '1701772361000'
 }, headers = headers)
 
 print(r.json())
