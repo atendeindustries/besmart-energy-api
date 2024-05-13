@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.36.5.1</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.43.9.3</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -193,6 +193,7 @@ print(r.json())
 |comments|query|string|false|none|
 |uncertain|query|boolean|false|Uncertain sensor|
 |negligible|query|boolean|false|Negligible sensor|
+|balance_calculation|query|boolean|false|Include in energy balance calculation|
 
 > Example responses
 
@@ -321,6 +322,7 @@ print(r.json())
 |comments|query|string|false|none|
 |uncertain|query|boolean|false|Uncertain sensor|
 |negligible|query|boolean|false|Negligible sensor|
+|balance_calculation|query|boolean|false|Include in energy balance calculation|
 
 > Example responses
 
@@ -1202,7 +1204,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1701945980000&till=1702032380000 HTTP/1.1
+GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1711473545000&till=1711559945000 HTTP/1.1
 
 Accept: application/json
 
@@ -1216,7 +1218,7 @@ headers = {
 }
 
 r = requests.get('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1701945980000',  'till': '1702032380000'
+  'since': '1711473545000',  'till': '1711559945000'
 }, headers = headers)
 
 print(r.json())
