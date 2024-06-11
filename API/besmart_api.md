@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.43.9.3</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.36.5.1</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -193,7 +193,6 @@ print(r.json())
 |comments|query|string|false|none|
 |uncertain|query|boolean|false|Uncertain sensor|
 |negligible|query|boolean|false|Negligible sensor|
-|balance_calculation|query|boolean|false|Include in energy balance calculation|
 
 > Example responses
 
@@ -322,7 +321,6 @@ print(r.json())
 |comments|query|string|false|none|
 |uncertain|query|boolean|false|Uncertain sensor|
 |negligible|query|boolean|false|Negligible sensor|
-|balance_calculation|query|boolean|false|Include in energy balance calculation|
 
 > Example responses
 
@@ -509,22 +507,14 @@ Using this endpoint client can put multiple signals data
 > Body parameter
 
 ```json
-[
-  {
-    "data": {},
-    "client_cid": 0,
-    "sensor_mid": 0,
-    "signal_type_moid": 0,
-    "unit": "string"
-  }
-]
+[]
 ```
 
 <h3 id="put-multiple-signals-data-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[PutMultipleSignalsRequest](#schemaputmultiplesignalsrequest)|true|none|
+|body|body|array|true|none|
 
 > Example responses
 
@@ -584,24 +574,14 @@ Using this endpoint client can get multiple signals data
 > Body parameter
 
 ```json
-[
-  {
-    "client_cid": 14,
-    "sensor_mid": 10594,
-    "signal_type_moid": 451,
-    "signal_origin_id": 1,
-    "since": 1692333175200,
-    "till": 1692343975200,
-    "apply_multiplier": false
-  }
-]
+[]
 ```
 
 <h3 id="get-multiple-signals-data-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[GetSignalRequest](#schemagetsignalrequest)|true|none|
+|body|body|array|true|none|
 
 > Example responses
 
@@ -1222,7 +1202,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1711473547000&till=1711559947000 HTTP/1.1
+GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1701945977000&till=1702032377000 HTTP/1.1
 
 Accept: application/json
 
@@ -1236,7 +1216,7 @@ headers = {
 }
 
 r = requests.get('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1711473547000',  'till': '1711559947000'
+  'since': '1701945977000',  'till': '1702032377000'
 }, headers = headers)
 
 print(r.json())
@@ -1606,10 +1586,7 @@ Client logs in to the server with login and password. As a result, they receive 
 > Body parameter
 
 ```json
-{
-  "login": "string",
-  "password": "string"
-}
+null
 ```
 
 <h3 id="login-and-get-token-parameters">Parameters</h3>
@@ -1714,97 +1691,6 @@ APIKeyHeader
 </aside>
 
 # Schemas
-
-<h2 id="tocS_GetSignalRequest">GetSignalRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemagetsignalrequest"></a>
-<a id="schema_GetSignalRequest"></a>
-<a id="tocSgetsignalrequest"></a>
-<a id="tocsgetsignalrequest"></a>
-
-```json
-{
-  "client_cid": 14,
-  "sensor_mid": 10594,
-  "signal_type_moid": 451,
-  "signal_origin_id": 1,
-  "since": 1692333175200,
-  "till": 1692343975200,
-  "apply_multiplier": false
-}
-
-```
-
-GetSignalRequest
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|client_cid|integer|true|none|none|
-|sensor_mid|integer|true|none|none|
-|signal_type_moid|integer|true|none|none|
-|signal_origin_id|integer|true|none|none|
-|since|integer|true|none|none|
-|till|integer|true|none|none|
-|apply_multiplier|boolean|false|none|none|
-|last_acq|boolean|false|none|none|
-|delta_t|integer|false|none|none|
-|output_unit_id|integer|false|none|none|
-
-<h2 id="tocS_GetTokenRequest">GetTokenRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemagettokenrequest"></a>
-<a id="schema_GetTokenRequest"></a>
-<a id="tocSgettokenrequest"></a>
-<a id="tocsgettokenrequest"></a>
-
-```json
-{
-  "login": "string",
-  "password": "string"
-}
-
-```
-
-GetTokenRequest
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|login|string|true|none|none|
-|password|string|true|none|none|
-
-<h2 id="tocS_PutMultipleSignalsRequest">PutMultipleSignalsRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemaputmultiplesignalsrequest"></a>
-<a id="schema_PutMultipleSignalsRequest"></a>
-<a id="tocSputmultiplesignalsrequest"></a>
-<a id="tocsputmultiplesignalsrequest"></a>
-
-```json
-{
-  "data": {},
-  "client_cid": 0,
-  "sensor_mid": 0,
-  "signal_type_moid": 0,
-  "unit": "string"
-}
-
-```
-
-PutMultipleSignalsRequest
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|data|object|true|none|none|
-|client_cid|integer|true|none|none|
-|sensor_mid|integer|true|none|none|
-|signal_type_moid|integer|true|none|none|
-|unit|string|false|none|none|
 
 <h2 id="tocS_SensorTypeResponse">SensorTypeResponse</h2>
 <!-- backwards compatibility -->
