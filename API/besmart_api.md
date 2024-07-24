@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.44.44.3</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.44.44.7</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -1288,7 +1288,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1718113671000&till=1718200071000 HTTP/1.1
+GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1721667538000&till=1721753938000 HTTP/1.1
 
 Accept: application/json
 
@@ -1302,7 +1302,7 @@ headers = {
 }
 
 r = requests.get('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1718113671000',  'till': '1718200071000'
+  'since': '1721667538000',  'till': '1721753938000'
 }, headers = headers)
 
 print(r.json())
