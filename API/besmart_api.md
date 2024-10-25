@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.45.32.8</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.46.16 rev.718babf - 2024-10-24 19</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -74,8 +74,7 @@ null
 
 |Status|Meaning|Description|
 |---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully executed task|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully executed task|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
 
@@ -466,17 +465,17 @@ Using this endpoint client can update sensor state for signal
 
 > Example responses
 
-> 200 Response
+> 404 Response
 
 ```json
-null
+"string"
 ```
 
 <h3 id="update-sensor-state-for-signal-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Updated state for signal|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Updated state for signal|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
@@ -600,17 +599,17 @@ print(r.json())
 
 > Example responses
 
-> 200 Response
+> 422 Response
 
 ```json
-null
+"string"
 ```
 
 <h3 id="put-multiple-signals-data-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated signals data|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated signals data|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
 
@@ -1023,11 +1022,11 @@ print(r.json())
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |sensor_state_id|path|integer|true|State ID|
-|since|query|integer|false|Start date (UTC unix timestamp in ms)|
-|till|query|integer|false|End date (UTC unix timestamp in ms)|
 |info|query|string|false|Additional information|
 |meter_eid|query|string|false|Meter external ID|
 |meter_type_id|query|string|false|Meter type id|
+|since|query|integer|false|none|
+|till|query|integer|false|none|
 
 > Example responses
 
@@ -1250,11 +1249,11 @@ print(r.json())
 |---|---|---|---|---|
 |client_cid|query|integer|true|Client CID|
 |sensor_mid|query|integer|true|Sensor MID|
-|since|query|integer|false|Start date (UTC unix timestamp in ms)|
-|till|query|integer|false|End date (UTC unix timestamp in ms)|
 |info|query|string|false|Additional information|
 |meter_eid|query|string|false|Meter external ID|
 |meter_type_id|query|integer|false|Meter type id|
+|since|query|integer|false|none|
+|till|query|integer|false|none|
 
 > Example responses
 
@@ -1288,7 +1287,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=1728488337000&till=1728574737000 HTTP/1.1
+GET /api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data?since=0&till=0 HTTP/1.1
 
 Accept: application/json
 
@@ -1302,7 +1301,7 @@ headers = {
 }
 
 r = requests.get('/api/sensors/{client_cid}.{sensor_mid}/signals/{signal_type_moid}/data', params={
-  'since': '1728488337000',  'till': '1728574737000'
+  'since': '0',  'till': '0'
 }, headers = headers)
 
 print(r.json())
@@ -1320,14 +1319,14 @@ Using this endpoint client can get signal data
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
 |signal_type_moid|path|integer|true|Signal type MOID|
-|since|query|integer|true|Start date (UTC unix timestamp)|
-|till|query|integer|true|End date (UTC unix timestamp)|
 |get_last|query|boolean|false|Get only records with newest acq time for the same cap times|
 |delta_t|query|integer|false|Aggregate time (in minutes)|
 |raw|query|boolean|false|Fetch raw signal|
-|apply_multiplier|query|boolean|false|Apply multiplier|
+|apply_multiplier|query|boolean|false|If True and signal type allows, multiplier will be applied. If False, multiplier won't be applied regardless of signal type.|
 |output_unit_id|query|integer|false|Output unit id|
 |signal_origin_id|query|integer|false|Signal origin id|
+|since|query|integer|true|none|
+|till|query|integer|true|none|
 
 > Example responses
 
@@ -1407,17 +1406,17 @@ false
 
 > Example responses
 
-> 200 Response
+> 404 Response
 
 ```json
-null
+"string"
 ```
 
 <h3 id="put-signal-data-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated signal data|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated signal data|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
@@ -1546,7 +1545,7 @@ This operation does not require authentication
 > Code samples
 
 ```http
-GET /api/weather/{lat}/{lon}/{signal_type_moid}/data?since=1577836800000&till=1580515200000 HTTP/1.1
+GET /api/weather/{lat}/{lon}/{signal_type_moid}/data?since=0&till=0 HTTP/1.1
 
 Accept: application/json
 
@@ -1560,7 +1559,7 @@ headers = {
 }
 
 r = requests.get('/api/weather/{lat}/{lon}/{signal_type_moid}/data', params={
-  'since': '1577836800000',  'till': '1580515200000'
+  'since': '0',  'till': '0'
 }, headers = headers)
 
 print(r.json())
@@ -1576,13 +1575,13 @@ print(r.json())
 |lat|path|number|true|Latitude|
 |lon|path|number|true|Longitude|
 |signal_type_moid|path|integer|true|Signal type MOID|
-|since|query|number|true|Start date (UTC unix timestamp)|
-|till|query|number|true|End date (UTC unix timestamp)|
 |delta_t|query|integer|false|Aggregate time (in minutes)|
 |raw|query|boolean|false|Fetch raw signal|
 |output_unit_id|query|integer|false|Output unit id|
 |signal_origin_id|query|integer|false|Signal origin id|
 |is_chart|query|boolean|false|Use expected chart output unit|
+|since|query|integer|true|none|
+|till|query|integer|true|none|
 
 > Example responses
 
@@ -1643,12 +1642,12 @@ GetSignalRequest
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|since|integer|true|none|Start date (UTC unix timestamp)|
+|till|integer|true|none|End date (UTC unix timestamp)|
 |client_cid|integer|true|none|none|
 |sensor_mid|integer|true|none|none|
 |signal_type_moid|integer|true|none|none|
 |signal_origin_id|integer|false|none|none|
-|since|integer|true|none|none|
-|till|integer|true|none|none|
 |apply_multiplier|boolean|false|none|none|
 |last_acq|boolean|false|none|none|
 |delta_t|integer|false|none|none|
