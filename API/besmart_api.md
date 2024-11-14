@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.46.16.2 rev.4d83f07 - 2024-11-07 14</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.46.16.3 rev.9096de7 - 2024-11-13 14</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
