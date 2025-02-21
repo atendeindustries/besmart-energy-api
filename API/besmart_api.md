@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.46.16.9 rev.66e198e - 2025-01-21 10</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.47.40 rev.3f6a3b7 - 2025-02-20 16</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -58,8 +58,8 @@ null
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |graph_name|query|string|true|Graph name|
-|since|query|integer|false|Start date (UTC unix timestamp in ms)|
-|till|query|integer|false|End date (UTC unix timestamp in ms)|
+|since|query|integer|false|none|
+|till|query|integer|false|none|
 |body|body|any|true|none|
 
 > Example responses
@@ -129,7 +129,8 @@ Using this endpoint client gets the list of all sensor types
     "description": "string",
     "sensor_state_custom_fields": "string",
     "sensor_custom_fields": "string",
-    "is_system_type": true
+    "is_system_type": true,
+    "is_unchangeable": true
   }
 ]
 ```
@@ -157,6 +158,7 @@ Status Code **200**
 |»» sensor_state_custom_fields|string|none|
 |»» sensor_custom_fields|string|none|
 |»» is_system_type|boolean|none|
+|»» is_unchangeable|boolean|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -231,6 +233,7 @@ HTTPBearer
 ```http
 PUT /api/sensors/{client_cid}.{sensor_mid} HTTP/1.1
 
+Content-Type: application/json
 Accept: application/json
 
 ```
@@ -238,6 +241,7 @@ Accept: application/json
 ```python
 import requests
 headers = {
+  'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': 'Bearer {access-token}'
 }
@@ -250,38 +254,32 @@ print(r.json())
 
 `PUT /api/sensors/{client_cid}.{sensor_mid}`
 
+> Body parameter
+
+```json
+false
+```
+
 <h3 id="update-sensor-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
-|node_id|query|integer|false|Node ID|
-|name|query|string|false|Name of the sensor|
-|sensor_type_id|query|integer|false|Sensor type ID|
-|sensor_eid|query|string|false|Sensor external ID|
-|lat|query|number|false|Sensor latitude|
-|lon|query|number|false|Sensor longitude|
-|annotations|query|string|false|Annotations to sensor update, in json format|
-|info|query|string|false|Additional information, in json format|
-|comments|query|string|false|none|
-|uncertain|query|boolean|false|Uncertain sensor|
-|negligible|query|boolean|false|Negligible sensor|
-|balance_calculation|query|boolean|false|Include in energy balance calculation|
 
 > Example responses
 
-> 200 Response
+> 404 Response
 
 ```json
-null
+"string"
 ```
 
 <h3 id="update-sensor-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully updated sensor|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated sensor|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
@@ -869,6 +867,8 @@ Using this endpoint client can read signals states for signal
 ```json
 [
   {
+    "log_category": "state",
+    "log_all": false,
     "sensor_state_id": 0,
     "client_cid": 0,
     "sensor_mid": 0,
@@ -902,8 +902,10 @@ Status Code **200**
 
 |Name|Type|Description|
 |---|---|---|
-|Response 200 Api Endpoints Sensors Get States Signals Api Sensors States Signals Get|[[SensorStateResponse](#schemasensorstateresponse)]|none|
-|» SensorStateResponse|[SensorStateResponse](#schemasensorstateresponse)|none|
+|Response 200 Api Endpoints Sensors Get States Signals Api Sensors States Signals Get|[[SensorStateResponse](#schemasensorstateresponse)]|[Base model for logging purposes.\n\nAttributes:\n    log_category (Optional[LOG_CATEGORY]): The category of the log.\n    log_all (bool): Whether to log all fields.\n\nMethods:\n    dict(*args, **kwargs) -> dict:\n        Returns a dictionary representation of the model, excluding log-only fields.\n\n    get_loggable_data(delete: bool = False) -> Dict[str, Dict[str, Any]]:\n        Returns a dictionary of loggable data (fields with log=True or log_only=True or log_always=True),\n        optionally including fields marked for deletion (log_delete=True).]|
+|» SensorStateResponse|[SensorStateResponse](#schemasensorstateresponse)|Base model for logging purposes.\n\nAttributes:\n    log_category (Optional[LOG_CATEGORY]): The category of the log.\n    log_all (bool): Whether to log all fields.\n\nMethods:\n    dict(*args, **kwargs) -> dict:\n        Returns a dictionary representation of the model, excluding log-only fields.\n\n    get_loggable_data(delete: bool = False) -> Dict[str, Dict[str, Any]]:\n        Returns a dictionary of loggable data (fields with log=True or log_only=True or log_always=True),\n        optionally including fields marked for deletion (log_delete=True).|
+|»» log_category|any|none|
+|»» log_all|boolean|none|
 |»» sensor_state_id|integer|none|
 |»» client_cid|integer|none|
 |»» sensor_mid|integer|none|
@@ -1157,6 +1159,8 @@ Using this endpoint client can get all states for given sensor
 ```json
 [
   {
+    "log_category": "state",
+    "log_all": false,
     "sensor_state_id": 0,
     "client_cid": 0,
     "sensor_mid": 0,
@@ -1192,8 +1196,10 @@ Status Code **200**
 
 |Name|Type|Description|
 |---|---|---|
-|Response 200 Api Endpoints Sensors Get States Api Sensors States Get|[[SensorStateResponse](#schemasensorstateresponse)]|none|
-|» SensorStateResponse|[SensorStateResponse](#schemasensorstateresponse)|none|
+|Response 200 Api Endpoints Sensors Get States Api Sensors States Get|[[SensorStateResponse](#schemasensorstateresponse)]|[Base model for logging purposes.\n\nAttributes:\n    log_category (Optional[LOG_CATEGORY]): The category of the log.\n    log_all (bool): Whether to log all fields.\n\nMethods:\n    dict(*args, **kwargs) -> dict:\n        Returns a dictionary representation of the model, excluding log-only fields.\n\n    get_loggable_data(delete: bool = False) -> Dict[str, Dict[str, Any]]:\n        Returns a dictionary of loggable data (fields with log=True or log_only=True or log_always=True),\n        optionally including fields marked for deletion (log_delete=True).]|
+|» SensorStateResponse|[SensorStateResponse](#schemasensorstateresponse)|Base model for logging purposes.\n\nAttributes:\n    log_category (Optional[LOG_CATEGORY]): The category of the log.\n    log_all (bool): Whether to log all fields.\n\nMethods:\n    dict(*args, **kwargs) -> dict:\n        Returns a dictionary representation of the model, excluding log-only fields.\n\n    get_loggable_data(delete: bool = False) -> Dict[str, Dict[str, Any]]:\n        Returns a dictionary of loggable data (fields with log=True or log_only=True or log_always=True),\n        optionally including fields marked for deletion (log_delete=True).|
+|»» log_category|any|none|
+|»» log_all|boolean|none|
 |»» sensor_state_id|integer|none|
 |»» client_cid|integer|none|
 |»» sensor_mid|integer|none|
@@ -1692,6 +1698,8 @@ PutMultipleSignalsRequest
 
 ```json
 {
+  "log_category": "state",
+  "log_all": false,
   "sensor_state_id": 0,
   "client_cid": 0,
   "sensor_mid": 0,
@@ -1714,6 +1722,8 @@ SensorStateResponse
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|log_category|[LOG_CATEGORY](#schemalog_category)|false|none|none|
+|log_all|boolean|false|none|none|
 |sensor_state_id|integer|false|none|none|
 |client_cid|integer|true|none|none|
 |sensor_mid|integer|true|none|none|
@@ -1741,7 +1751,8 @@ SensorStateResponse
   "description": "string",
   "sensor_state_custom_fields": "string",
   "sensor_custom_fields": "string",
-  "is_system_type": true
+  "is_system_type": true,
+  "is_unchangeable": true
 }
 
 ```
@@ -1758,6 +1769,44 @@ SensorTypeResponse
 |sensor_state_custom_fields|string|false|none|none|
 |sensor_custom_fields|string|false|none|none|
 |is_system_type|boolean|true|none|none|
+|is_unchangeable|boolean|true|none|none|
+
+<h2 id="tocS_SignalDataGetRequest">SignalDataGetRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemasignaldatagetrequest"></a>
+<a id="schema_SignalDataGetRequest"></a>
+<a id="tocSsignaldatagetrequest"></a>
+<a id="tocssignaldatagetrequest"></a>
+
+```json
+{
+  "client_cid": 14,
+  "sensor_mid": 10594,
+  "origin_id": 1,
+  "signal_type_moid": 451,
+  "since": 1692333175200,
+  "till": 1692343975200,
+  "raw": true
+}
+
+```
+
+SignalDataGetRequest
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|since|integer|true|none|Start date (UTC unix timestamp)|
+|till|integer|true|none|End date (UTC unix timestamp)|
+|client_cid|integer|true|none|none|
+|sensor_mid|integer|true|none|none|
+|signal_type_moid|integer|true|none|none|
+|origin_id|integer|false|none|none|
+|last_acq|boolean|false|none|none|
+|output_unit_id|integer|false|none|none|
+|delta_t|integer|false|none|none|
+|raw|boolean|false|none|none|
 
 <h2 id="tocS_SignalResponse">SignalResponse</h2>
 <!-- backwards compatibility -->
