@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.47.46.1 rev.f3948a8 - 2025-03-28 15</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.48.26 rev.cb50f4f - 2025-04-10 15</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -1331,6 +1331,7 @@ Using this endpoint client can get signal data
 |apply_multiplier|query|boolean|false|If True and signal type allows, multiplier will be applied. If False, multiplier won't be applied regardless of signal type.|
 |output_unit_id|query|integer|false|Output unit id|
 |signal_origin_id|query|integer|false|Signal origin id|
+|time_series_type|query|integer|false|Time series type|
 |since|query|integer|true|none|
 |till|query|integer|true|none|
 
