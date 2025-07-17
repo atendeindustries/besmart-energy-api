@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.48.26.20 rev.c9a2c17 - 2025-07-07 10</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.49.45 rev.bfe91de - 2025-07-16 16</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -60,6 +60,7 @@ null
 |graph_name|query|string|true|Graph name|
 |since|query|integer|false|none|
 |till|query|integer|false|none|
+|access_token|cookie|string|false|none|
 |body|body|any|true|none|
 
 > Example responses
@@ -117,6 +118,12 @@ print(r.json())
 
 Using this endpoint client gets the list of all sensor types
 
+<h3 id="get-list-of-sensor-types-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|access_token|cookie|string|false|none|
+
 > Example responses
 
 > 200 Response
@@ -141,6 +148,7 @@ Using this endpoint client gets the list of all sensor types
 |---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read sensor types|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
 
 <h3 id="get-list-of-sensor-types-responseschema">Response Schema</h3>
 
@@ -199,6 +207,7 @@ print(r.json())
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -266,6 +275,7 @@ false
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -325,6 +335,7 @@ print(r.json())
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -395,6 +406,7 @@ print(r.json())
 |uncertain|query|boolean|false|Uncertain sensor|
 |negligible|query|boolean|false|Negligible sensor|
 |balance_calculation|query|boolean|false|Include in energy balance calculation|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -460,6 +472,7 @@ Using this endpoint client can update sensor state for signal
 |value_for_since|query|string|false|Value for state start|
 |value_for_till|query|string|false|Value for state end|
 |info|query|string|false|Additional information|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -520,6 +533,7 @@ Using this endpoint client can delete sensor state for signal
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |signal_state_id|path|integer|true|Signal state ID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -593,6 +607,7 @@ print(r.json())
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|access_token|cookie|string|false|none|
 |body|body|[PutMultipleSignalsRequest](#schemaputmultiplesignalsrequest)|true|none|
 
 > Example responses
@@ -668,6 +683,7 @@ print(r.json())
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|access_token|cookie|string|false|none|
 |body|body|[GetSignalRequest](#schemagetsignalrequest)|true|none|
 
 > Example responses
@@ -747,6 +763,12 @@ print(r.json())
 
 Using this endpoint client can get all signal types
 
+<h3 id="get-signals-types-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|access_token|cookie|string|false|none|
+
 > Example responses
 
 > 200 Response
@@ -784,6 +806,7 @@ Using this endpoint client can get all signal types
 |---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read signals types|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
 
 <h3 id="get-signals-types-responseschema">Response Schema</h3>
 
@@ -859,6 +882,7 @@ Using this endpoint client can read signals states for signal
 |client_cid|query|integer|false|Client CID|
 |sensor_mid|query|integer|false|Sensor MID|
 |signal_type_moid|query|integer|false|Signal type MOID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -966,6 +990,7 @@ Using this endpoint client can create signal state for given sensor state
 |value_for_since|query|number|false|Value for state start|
 |value_for_till|query|number|false|Value for state end|
 |info|query|string|false|Additional information|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1029,6 +1054,7 @@ print(r.json())
 |meter_type_id|query|string|false|Meter type id|
 |since|query|integer|false|none|
 |till|query|integer|false|none|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1090,6 +1116,7 @@ Using this endpoint client can delete sensor state
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |sensor_state_id|path|integer|true|State ID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1151,6 +1178,7 @@ Using this endpoint client can get all states for given sensor
 |---|---|---|---|---|
 |client_cid|query|integer|false|Client CID|
 |sensor_mid|query|integer|false|Sensor MID|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1260,6 +1288,7 @@ print(r.json())
 |meter_type_id|query|integer|false|Meter type id|
 |since|query|integer|false|none|
 |till|query|integer|false|none|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1334,6 +1363,7 @@ Using this endpoint client can get signal data
 |time_series_type|query|integer|false|Time series type|
 |since|query|integer|true|none|
 |till|query|integer|true|none|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1410,6 +1440,7 @@ false
 |sensor_mid|path|integer|true|Sensor MID|
 |signal_type_moid|path|integer|true|Signal type MOID|
 |unit|query|string|false|Signal unit|
+|access_token|cookie|string|false|none|
 
 > Example responses
 
@@ -1467,6 +1498,12 @@ print(r.json())
 
 Client reads endpoint to refresh the token.
 
+<h3 id="refresh-token-and-get-token-info-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|access_token|cookie|string|false|none|
+
 > Example responses
 
 <h3 id="refresh-token-and-get-token-info-responses">Responses</h3>
@@ -1475,6 +1512,7 @@ Client reads endpoint to refresh the token.
 |---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully token was refreshed|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
 
 <h3 id="refresh-token-and-get-token-info-responseschema">Response Schema</h3>
 
