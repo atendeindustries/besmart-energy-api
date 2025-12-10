@@ -45,6 +45,8 @@ In addition, each measurement data is marked with the 'origin' flag, which signi
 * '1' - means measured real data
 * '2' - means the predicted data
 * '3' - means calculated data
+* '4' - means estimated data
+* '5' - means corrected data
 
 Therefore, the JSON structure representing a single measurement data has the following format, e.g .:
 
