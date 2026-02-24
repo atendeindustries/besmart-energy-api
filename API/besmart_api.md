@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.58.16</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.58.19.1</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -2124,14 +2124,14 @@ This operation does not require authentication
 
 <h1 id="besmart-rest-api-weather">Weather</h1>
 
-## Get weather data by geoposition
+## Get weather data
 
-<a id="opIdapi_endpoints_weather_get_lat_lon_signals_id_data_api_weather__lat___lon___signal_type_moid__data_get"></a>
+<a id="opIdapi_endpoints_weather_get_id_signals_id_data_api_weather_external__sensor_mid__signals__signal_type_moid__data_get"></a>
 
 > Code samples
 
 ```http
-GET /api/weather/{lat}/{lon}/{signal_type_moid}/data?since=0&till=0 HTTP/1.1
+GET /api/weather/external/{sensor_mid}/signals/{signal_type_moid}/data?since=0&till=0 HTTP/1.1
 
 Accept: application/json
 
@@ -2141,10 +2141,10 @@ Accept: application/json
 import requests
 headers = {
   'Accept': 'application/json',
-  'X-Auth': 'API_KEY'
+  'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('/api/weather/{lat}/{lon}/{signal_type_moid}/data', params={
+r = requests.get('/api/weather/external/{sensor_mid}/signals/{signal_type_moid}/data', params={
   'since': '0',  'till': '0'
 }, headers = headers)
 
@@ -2152,9 +2152,84 @@ print(r.json())
 
 ```
 
-`GET /api/weather/{lat}/{lon}/{signal_type_moid}/data`
+`GET /api/weather/external/{sensor_mid}/signals/{signal_type_moid}/data`
 
-<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather__lat___lon___signal_type_moid__data_get-parameters">Parameters</h3>
+<h3 id="api_endpoints_weather_get_id_signals_id_data_api_weather_external__sensor_mid__signals__signal_type_moid__data_get-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|sensor_mid|path|integer|true|Sensor MID|
+|signal_type_moid|path|integer|true|Signal type MOID|
+|delta_t|query|integer|false|Aggregate time (in minutes)|
+|raw|query|boolean|false|Fetch raw signal|
+|output_unit_id|query|integer|false|Output unit id|
+|signal_origin_id|query|integer|false|Signal origin id|
+|is_chart|query|boolean|false|Use expected chart output unit|
+|since|query|integer|true|none|
+|till|query|integer|true|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "client_cid": 0,
+  "sensor_mid": 0,
+  "signal_type_moid": 0,
+  "unit": "string",
+  "time_tstorage": 0,
+  "time_other": 0
+}
+```
+
+<h3 id="api_endpoints_weather_get_id_signals_id_data_api_weather_external__sensor_mid__signals__signal_type_moid__data_get-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read weather data|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
+
+<h3 id="api_endpoints_weather_get_id_signals_id_data_api_weather_external__sensor_mid__signals__signal_type_moid__data_get-responseschema">Response Schema</h3>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
+</aside>
+
+## Get weather data by geoposition
+
+<a id="opIdapi_endpoints_weather_get_lat_lon_signals_id_data_api_weather_external__lat___lon___signal_type_moid__data_get"></a>
+
+> Code samples
+
+```http
+GET /api/weather/external/{lat}/{lon}/{signal_type_moid}/data?since=0&till=0 HTTP/1.1
+
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/api/weather/external/{lat}/{lon}/{signal_type_moid}/data', params={
+  'since': '0',  'till': '0'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /api/weather/external/{lat}/{lon}/{signal_type_moid}/data`
+
+<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather_external__lat___lon___signal_type_moid__data_get-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -2184,7 +2259,7 @@ print(r.json())
 }
 ```
 
-<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather__lat___lon___signal_type_moid__data_get-responses">Responses</h3>
+<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather_external__lat___lon___signal_type_moid__data_get-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
@@ -2193,11 +2268,69 @@ print(r.json())
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
 
-<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather__lat___lon___signal_type_moid__data_get-responseschema">Response Schema</h3>
+<h3 id="api_endpoints_weather_get_lat_lon_signals_id_data_api_weather_external__lat___lon___signal_type_moid__data_get-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
-APIKeyHeader
+HTTPBearer
+</aside>
+
+## Find sensor mid based on lat/lon
+
+<a id="opIdapi_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get"></a>
+
+> Code samples
+
+```http
+GET /api/weather/external/find/mid HTTP/1.1
+
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/api/weather/external/find/mid', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /api/weather/external/find/mid`
+
+<h3 id="api_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|lat|query|number|false|Latitude|
+|lon|query|number|false|Longitude|
+
+> Example responses
+
+> 422 Response
+
+```json
+"string"
+```
+
+<h3 id="api_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully returned sensor mid|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
+
+<h3 id="api_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get-responseschema">Response Schema</h3>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
 </aside>
 
 # Schemas
