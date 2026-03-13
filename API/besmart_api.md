@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.58.19.1</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.59.34</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -1149,7 +1149,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 HTTPBearer
 </aside>
 
-## Get multiple signals data
+## Get multiple signals data v2
 
 <a id="opIdapi_endpoints_sensors_post_signals_data_v2_api_sensors_signals_data_v2_post"></a>
 
@@ -1354,7 +1354,7 @@ HTTPBearer
 > Code samples
 
 ```http
-GET /api/sensors/states/signals HTTP/1.1
+GET /api/sensors/states/signals?client_cid=0&sensor_mid=0&signal_type_moid=0 HTTP/1.1
 
 Accept: application/json
 
@@ -1367,7 +1367,9 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.get('/api/sensors/states/signals', headers = headers)
+r = requests.get('/api/sensors/states/signals', params={
+  'client_cid': '0',  'sensor_mid': '0',  'signal_type_moid': '0'
+}, headers = headers)
 
 print(r.json())
 
@@ -1381,9 +1383,9 @@ Using this endpoint client can read signals states for signal
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|client_cid|query|integer|false|Client CID|
-|sensor_mid|query|integer|false|Sensor MID|
-|signal_type_moid|query|integer|false|Signal type MOID|
+|client_cid|query|integer|true|Client CID|
+|sensor_mid|query|integer|true|Sensor MID|
+|signal_type_moid|query|integer|true|Signal type MOID|
 
 > Example responses
 
@@ -1395,8 +1397,8 @@ Using this endpoint client can read signals states for signal
     "sensor_state_id": 0,
     "client_cid": 0,
     "sensor_mid": 0,
-    "since": 0,
-    "till": 0,
+    "since": "2019-08-24T14:15:22Z",
+    "till": "2019-08-24T14:15:22Z",
     "meter_eid": "string",
     "info": "string",
     "meter_type_id": 0,
@@ -1427,10 +1429,19 @@ Status Code **200**
 |»» sensor_state_id|integer|none|
 |»» client_cid|integer|none|
 |»» sensor_mid|integer|none|
-|»» since|number|none|
-|»» till|number|none|
+|»» since|string(date-time)|none|
+|»» till|string(date-time)|none|
 |»» meter_eid|string|none|
-|»» info|string|none|
+|»» info|any|none|
+
+|Name|Type|Description|
+|---|---|---|
+
+|Name|Type|Description|
+|---|---|---|
+
+|Name|Type|Description|
+|---|---|---|
 |»» meter_type_id|integer|none|
 |»» meter_type_name|string|none|
 |»» meter_type_is_ami|boolean|none|
@@ -1534,6 +1545,8 @@ print(r.json())
 ```
 
 `PUT /api/sensors/states/{sensor_state_id}`
+
+Deprecated. Use PUT /api/sensors/states/{sensor_state_id}/v2 instead.
 
 <h3 id="api_endpoints_sensors_put_states_id_api_sensors_states__sensor_state_id__put-parameters">Parameters</h3>
 
@@ -1678,8 +1691,8 @@ Using this endpoint client can get all states for given sensor
     "sensor_state_id": 0,
     "client_cid": 0,
     "sensor_mid": 0,
-    "since": 0,
-    "till": 0,
+    "since": "2019-08-24T14:15:22Z",
+    "till": "2019-08-24T14:15:22Z",
     "meter_eid": "string",
     "info": "string",
     "meter_type_id": 0,
@@ -1712,10 +1725,19 @@ Status Code **200**
 |»» sensor_state_id|integer|none|
 |»» client_cid|integer|none|
 |»» sensor_mid|integer|none|
-|»» since|number|none|
-|»» till|number|none|
+|»» since|string(date-time)|none|
+|»» till|string(date-time)|none|
 |»» meter_eid|string|none|
-|»» info|string|none|
+|»» info|any|none|
+
+|Name|Type|Description|
+|---|---|---|
+
+|Name|Type|Description|
+|---|---|---|
+
+|Name|Type|Description|
+|---|---|---|
 |»» meter_type_id|integer|none|
 |»» meter_type_name|string|none|
 |»» meter_type_is_ami|boolean|none|
@@ -2361,11 +2383,11 @@ GetSignalRequest
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|since|integer|true|none|Start date (UTC unix timestamp)|
-|till|integer|true|none|End date (UTC unix timestamp)|
 |client_cid|integer|true|none|none|
 |sensor_mid|integer|true|none|none|
 |signal_type_moid|integer|true|none|none|
+|since|integer|true|none|Start date (UTC unix timestamp)|
+|till|integer|true|none|End date (UTC unix timestamp)|
 |signal_origin_id|integer|false|none|none|
 |apply_multiplier|boolean|false|none|none|
 |last_acq|boolean|false|none|none|
@@ -2473,8 +2495,8 @@ PutMultipleSignalsRequest
   "sensor_state_id": 0,
   "client_cid": 0,
   "sensor_mid": 0,
-  "since": 0,
-  "till": 0,
+  "since": "2019-08-24T14:15:22Z",
+  "till": "2019-08-24T14:15:22Z",
   "meter_eid": "string",
   "info": "string",
   "meter_type_id": 0,
@@ -2495,10 +2517,27 @@ SensorStateResponse
 |sensor_state_id|integer|false|none|none|
 |client_cid|integer|true|none|none|
 |sensor_mid|integer|true|none|none|
-|since|number|false|none|none|
-|till|number|false|none|none|
+|since|string(date-time)|false|none|none|
+|till|string(date-time)|false|none|none|
 |meter_eid|string|false|none|none|
-|info|string|false|none|none|
+|info|any|false|none|none|
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|string|false|none|none|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[SchemaModel](#schemaschemamodel)|false|none|none|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
 |meter_type_id|integer|false|none|none|
 |meter_type_name|string|false|none|none|
 |meter_type_is_ami|boolean|false|none|none|
@@ -2565,11 +2604,11 @@ SignalDataGetRequest
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|since|integer|true|none|Start date (UTC unix timestamp)|
-|till|integer|true|none|End date (UTC unix timestamp)|
 |client_cid|integer|true|none|none|
 |sensor_mid|integer|true|none|none|
 |signal_type_moid|integer|true|none|none|
+|since|integer|true|none|Start date (UTC unix timestamp)|
+|till|integer|true|none|End date (UTC unix timestamp)|
 |origin_id|integer|false|none|none|
 |last_acq|boolean|false|none|none|
 |output_unit_id|integer|false|none|none|
