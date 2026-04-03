@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.59.34</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.60.26.1</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -2187,6 +2187,8 @@ print(r.json())
 |output_unit_id|query|integer|false|Output unit id|
 |signal_origin_id|query|integer|false|Signal origin id|
 |is_chart|query|boolean|false|Use expected chart output unit|
+|get_last|query|boolean|false|Get only records with newest acq time for the same cap times|
+|variant|query|string|false|Additional weather variant parameters in JSON format (e.g. whether to either calculate wind speed or direction)|
 |since|query|integer|true|none|
 |till|query|integer|true|none|
 
@@ -2263,6 +2265,8 @@ print(r.json())
 |output_unit_id|query|integer|false|Output unit id|
 |signal_origin_id|query|integer|false|Signal origin id|
 |is_chart|query|boolean|false|Use expected chart output unit|
+|get_last|query|boolean|false|Get only records with newest acq time for the same cap times|
+|variant|query|string|false|Additional weather variants parameters (e.g. whether to either calculate wind speed or direction)|
 |since|query|integer|true|none|
 |till|query|integer|true|none|
 
