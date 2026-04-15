@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.60.26.1</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.61.14</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -138,7 +138,17 @@ print(r.json())
 > Body parameter
 
 ```json
-false
+{
+  "name": "meter type name",
+  "description": "meter type description",
+  "number_of_phases": 1,
+  "is_balance": true,
+  "is_ami": false,
+  "is_dcu": false,
+  "is_remote": false,
+  "prefix_name": "prefix name",
+  "default_cap_period": 1
+}
 ```
 
 <h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-parameters">Parameters</h3>
@@ -146,6 +156,16 @@ false
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client cid|
+|body|body|[MeterTypeRequest](#schemametertyperequest)|true|none|
+|» name|body|string|true|none|
+|» description|body|string|false|none|
+|» number_of_phases|body|integer|true|none|
+|» is_balance|body|boolean|false|none|
+|» is_ami|body|boolean|false|none|
+|» is_dcu|body|boolean|false|none|
+|» is_remote|body|boolean|false|none|
+|» prefix_name|body|string|false|none|
+|» default_cap_period|body|integer|false|none|
 
 > Example responses
 
@@ -177,8 +197,6 @@ false
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|There is another state in that period|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Date since is same or greater than date till|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|
-
-<h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -233,6 +251,14 @@ print(r.json())
 
 > Example responses
 
+> 401 Response
+
+```json
+{
+  "detail": "string"
+}
+```
+
 <h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-responses">Responses</h3>
 
 |Status|Meaning|Description|
@@ -284,6 +310,14 @@ print(r.json())
 |meter_type_id|path|integer|true|Meter type id|
 
 > Example responses
+
+> 401 Response
+
+```json
+{
+  "detail": "string"
+}
+```
 
 <h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-responses">Responses</h3>
 
@@ -413,10 +447,32 @@ print(r.json())
 
 > Example responses
 
-> 404 Response
+> 200 Response
 
 ```json
-"string"
+{
+  "client_cid": 0,
+  "sensor_mid": 0,
+  "sensor_type_id": 0,
+  "name": "string",
+  "sensor_eid": "string",
+  "lat": 0,
+  "lon": 0,
+  "info": "string",
+  "comments": "string",
+  "negligible": true,
+  "uncertain": true,
+  "balance_calculation": true,
+  "acq_min": 0,
+  "sensor_type_name": "string",
+  "sensor_type_description": "string",
+  "sensor_type_sensor_state_custom_fields": "string",
+  "sensor_type_sensor_custom_fields": "string",
+  "write": true,
+  "read": true,
+  "execute": true,
+  "existing_sensor_state": true
+}
 ```
 
 <h3 id="api_endpoints_sensors_get_id_api_sensors__client_cid___sensor_mid__get-responses">Responses</h3>
@@ -468,7 +524,19 @@ print(r.json())
 > Body parameter
 
 ```json
-false
+{
+  "name": "string",
+  "sensor_type_id": 0,
+  "sensor_eid": "string",
+  "lat": -90,
+  "lon": -180,
+  "info": "string",
+  "comments": "string",
+  "uncertain": true,
+  "negligible": true,
+  "balance_calculation": true,
+  "node_id": 0
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_id_api_sensors__client_cid___sensor_mid__put-parameters">Parameters</h3>
@@ -477,13 +545,27 @@ false
 |---|---|---|---|---|
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
+|body|body|[PutSensorRequest](#schemaputsensorrequest)|true|none|
+|» name|body|string|true|none|
+|» sensor_type_id|body|integer|true|none|
+|» sensor_eid|body|string|false|none|
+|» lat|body|number|false|none|
+|» lon|body|number|false|none|
+|» info|body|string|false|none|
+|» comments|body|string|false|none|
+|» uncertain|body|boolean|false|none|
+|» negligible|body|boolean|false|none|
+|» balance_calculation|body|boolean|false|none|
+|» node_id|body|integer|false|none|
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_id_api_sensors__client_cid___sensor_mid__put-responses">Responses</h3>
@@ -539,10 +621,12 @@ print(r.json())
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_delete_id_api_sensors__client_cid___sensor_mid__delete-responses">Responses</h3>
@@ -609,10 +693,13 @@ print(r.json())
 
 > Example responses
 
-> 409 Response
+> 201 Response
 
 ```json
-"string"
+{
+  "client_cid": 0,
+  "sensor_mid": 0
+}
 ```
 
 <h3 id="api_endpoints_sensors_post_api_sensors_post-responses">Responses</h3>
@@ -623,8 +710,6 @@ print(r.json())
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
-
-<h3 id="api_endpoints_sensors_post_api_sensors_post-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -746,10 +831,12 @@ Using this endpoint client can update sensor state for signal
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_states_signals_id_api_sensors_states_signals__signal_state_id__put-responses">Responses</h3>
@@ -806,10 +893,12 @@ Using this endpoint client can delete sensor state for signal
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_delete_states_signals_id_api_sensors_states_signals__signal_state_id__delete-responses">Responses</h3>
@@ -861,7 +950,10 @@ print(r.json())
 > Body parameter
 
 ```json
-false
+{
+  "value_for_since": 0,
+  "value_for_till": 0
+}
 ```
 
 <h3 id="api_endpoints_sensors_patch_states_signals_id_api_sensors_states_signals__signal_state_id__patch-parameters">Parameters</h3>
@@ -869,13 +961,18 @@ false
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |signal_state_id|path|integer|true|Signal state ID|
+|body|body|[SignalStatePartialUpdateDto](#schemasignalstatepartialupdatedto)|true|none|
+|» value_for_since|body|number|false|Value for state start|
+|» value_for_till|body|number|false|Value for state end|
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_patch_states_signals_id_api_sensors_states_signals__signal_state_id__patch-responses">Responses</h3>
@@ -1128,10 +1225,12 @@ print(r.json())
 
 > Example responses
 
-> 422 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_signals_data_v2_api_sensors_signals_data_v2_put-responses">Responses</h3>
@@ -1141,8 +1240,6 @@ print(r.json())
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated signals data|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
-
-<h3 id="api_endpoints_sensors_put_signals_data_v2_api_sensors_signals_data_v2_put-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1286,7 +1383,7 @@ Using this endpoint client can get all signal types
     "symbol": "string",
     "description": "string",
     "is_measurement": true,
-    "time_series_type": null,
+    "time_series_type": 0,
     "apply_multiplier": true,
     "apply_current_ratio": true,
     "apply_voltage_ratio": true,
@@ -1298,8 +1395,10 @@ Using this endpoint client can get all signal types
     "unit_symbol": "string",
     "group_id": 0,
     "group": "string",
-    "data_model_type": null,
-    "chart_expected_summary": [],
+    "data_model_type": 0,
+    "chart_expected_summary": [
+      0
+    ],
     "columns": {},
     "payload_mapping": {}
   }
@@ -1325,7 +1424,7 @@ Status Code **200**
 |»» symbol|string|none|
 |»» description|string|none|
 |»» is_measurement|boolean|none|
-|»» time_series_type|any|none|
+|»» time_series_type|[TimeSeriesType](#schematimeseriestype)|An enumeration.|
 |»» apply_multiplier|boolean|none|
 |»» apply_current_ratio|boolean|none|
 |»» apply_voltage_ratio|boolean|none|
@@ -1337,10 +1436,37 @@ Status Code **200**
 |»» unit_symbol|string|none|
 |»» group_id|integer|none|
 |»» group|string|none|
-|»» data_model_type|any|none|
-|»» chart_expected_summary|array|none|
+|»» data_model_type|[DataModelType](#schemadatamodeltype)|An enumeration.|
+|»» chart_expected_summary|[[ChartExpectedSummary](#schemachartexpectedsummary)]|[An enumeration.]|
+|»»» ChartExpectedSummary|[ChartExpectedSummary](#schemachartexpectedsummary)|An enumeration.|
 |»» columns|object|none|
 |»» payload_mapping|object|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|time_series_type|0|
+|time_series_type|1|
+|time_series_type|2|
+|data_model_type|0|
+|data_model_type|1|
+|data_model_type|2|
+|data_model_type|3|
+|data_model_type|4|
+|data_model_type|5|
+|data_model_type|6|
+|data_model_type|7|
+|data_model_type|8|
+|data_model_type|9|
+|data_model_type|10|
+|ChartExpectedSummary|0|
+|ChartExpectedSummary|1|
+|ChartExpectedSummary|2|
+|ChartExpectedSummary|3|
+|ChartExpectedSummary|4|
+|ChartExpectedSummary|5|
+|ChartExpectedSummary|6|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1405,7 +1531,14 @@ Using this endpoint client can read signals states for signal
     "meter_type_name": "string",
     "meter_type_is_ami": true,
     "meter_type_is_dcu": true,
-    "signal_states": []
+    "signal_states": [
+      {
+        "signal_type_moid": 0,
+        "value_for_since": 0,
+        "value_for_till": 0,
+        "signal_state_id": 0
+      }
+    ]
   }
 ]
 ```
@@ -1446,7 +1579,12 @@ Status Code **200**
 |»» meter_type_name|string|none|
 |»» meter_type_is_ami|boolean|none|
 |»» meter_type_is_dcu|boolean|none|
-|»» signal_states|array|none|
+|»» signal_states|[[SignalStateDto](#schemasignalstatedto)]|none|
+|»»» SignalStateDto|[SignalStateDto](#schemasignalstatedto)|none|
+|»»»» signal_type_moid|integer|none|
+|»»»» value_for_since|number|none|
+|»»»» value_for_till|number|none|
+|»»»» signal_state_id|integer|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1496,10 +1634,17 @@ Using this endpoint client can create signal state for given sensor state
 
 > Example responses
 
-> 404 Response
+> 201 Response
 
 ```json
-"string"
+{
+  "info": "string",
+  "sensor_state_id": 0,
+  "signal_state_id": 0,
+  "signal_type_moid": 0,
+  "value_for_since": 0,
+  "value_for_till": 0
+}
 ```
 
 <h3 id="api_endpoints_sensors_post_states_id_signals_api_sensors_states__sensor_state_id__signals_post-responses">Responses</h3>
@@ -1622,10 +1767,12 @@ Using this endpoint client can delete sensor state
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_delete_states_id_api_sensors_states__sensor_state_id__delete-responses">Responses</h3>
@@ -1699,7 +1846,14 @@ Using this endpoint client can get all states for given sensor
     "meter_type_name": "string",
     "meter_type_is_ami": true,
     "meter_type_is_dcu": true,
-    "signal_states": []
+    "signal_states": [
+      {
+        "signal_type_moid": 0,
+        "value_for_since": 0,
+        "value_for_till": 0,
+        "signal_state_id": 0
+      }
+    ]
   }
 ]
 ```
@@ -1742,7 +1896,12 @@ Status Code **200**
 |»» meter_type_name|string|none|
 |»» meter_type_is_ami|boolean|none|
 |»» meter_type_is_dcu|boolean|none|
-|»» signal_states|array|none|
+|»» signal_states|[[SignalStateDto](#schemasignalstatedto)]|none|
+|»»» SignalStateDto|[SignalStateDto](#schemasignalstatedto)|none|
+|»»»» signal_type_moid|integer|none|
+|»»»» value_for_since|number|none|
+|»»»» value_for_till|number|none|
+|»»»» signal_state_id|integer|none|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1793,10 +1952,25 @@ print(r.json())
 
 > Example responses
 
-> 404 Response
+> 201 Response
 
 ```json
-"string"
+{
+  "client_cid": 0,
+  "info": "string",
+  "meter_eid": "string",
+  "meter_type_id": 0,
+  "meter_type_is_ami": true,
+  "meter_type_is_dcu": true,
+  "meter_type_name": "string",
+  "sensor_mid": 0,
+  "sensor_state_id": 0,
+  "signal_states": [
+    {}
+  ],
+  "since": 0,
+  "till": 0
+}
 ```
 
 <h3 id="api_endpoints_sensors_post_states_api_sensors_states_post-responses">Responses</h3>
@@ -1808,8 +1982,6 @@ print(r.json())
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Failed attempt - no resource|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
-
-<h3 id="api_endpoints_sensors_post_states_api_sensors_states_post-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1946,10 +2118,12 @@ null
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_id_signals_id_data_api_sensors__client_cid___sensor_mid__signals__signal_type_moid__data_put-responses">Responses</h3>
@@ -2001,7 +2175,26 @@ print(r.json())
 > Body parameter
 
 ```json
-false
+{
+  "data": {
+    "time": [
+      1750222800000,
+      1750258800000
+    ],
+    "value": [
+      0,
+      0
+    ],
+    "type": [
+      "RM",
+      "DBL"
+    ],
+    "origin": [
+      1,
+      1
+    ]
+  }
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_id_signals_id_data_v2_api_sensors__client_cid___sensor_mid__signals__signal_type_moid__data_v2_put-parameters">Parameters</h3>
@@ -2012,13 +2205,17 @@ false
 |sensor_mid|path|integer|true|Sensor MID|
 |signal_type_moid|path|integer|true|Signal type MOID|
 |unit|query|string|false|Signal unit|
+|body|body|[PutSignalRequest](#schemaputsignalrequest)|true|none|
+|» data|body|object|true|Data to upload. Special value type 'RM' can be used to instead delete data.|
 
 > Example responses
 
-> 404 Response
+> 401 Response
 
 ```json
-"string"
+{
+  "detail": "string"
+}
 ```
 
 <h3 id="api_endpoints_sensors_put_id_signals_id_data_v2_api_sensors__client_cid___sensor_mid__signals__signal_type_moid__data_v2_put-responses">Responses</h3>
@@ -2069,6 +2266,17 @@ print(r.json())
 
 > Example responses
 
+> 200 Response
+
+```json
+{
+  "user_id": 0,
+  "token": "string",
+  "expiration": 0,
+  "account_status": {}
+}
+```
+
 <h3 id="api_endpoints_users_get_token_info_api_users_token_get-responses">Responses</h3>
 
 |Status|Meaning|Description|
@@ -2118,15 +2326,31 @@ Client logs in to the server with login and password. As a result, they receive 
 > Body parameter
 
 ```json
-false
+{
+  "login": "string",
+  "password": "string"
+}
 ```
+
+<h3 id="api_endpoints_users_get_token_api_users_token_post-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[GetTokenRequest](#schemagettokenrequest)|true|none|
+|» login|body|string|true|none|
+|» password|body|string|true|none|
 
 > Example responses
 
-> 404 Response
+> 200 Response
 
 ```json
-"string"
+{
+  "user_id": 0,
+  "token": "string",
+  "expiration": 0,
+  "account_status": {}
+}
 ```
 
 <h3 id="api_endpoints_users_get_token_api_users_token_post-responses">Responses</h3>
@@ -2338,10 +2562,12 @@ print(r.json())
 
 > Example responses
 
-> 422 Response
+> 200 Response
 
 ```json
-"string"
+{
+  "mid": 0
+}
 ```
 
 <h3 id="api_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get-responses">Responses</h3>
@@ -2352,14 +2578,126 @@ print(r.json())
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
 
-<h3 id="api_endpoints_weather_get_weather_mid_by_latlon_api_weather_external_find_mid_get-responseschema">Response Schema</h3>
-
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 HTTPBearer
 </aside>
 
 # Schemas
+
+<h2 id="tocS_ChartExpectedSummary">ChartExpectedSummary</h2>
+<!-- backwards compatibility -->
+<a id="schemachartexpectedsummary"></a>
+<a id="schema_ChartExpectedSummary"></a>
+<a id="tocSchartexpectedsummary"></a>
+<a id="tocschartexpectedsummary"></a>
+
+```json
+0
+
+```
+
+ChartExpectedSummary
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|ChartExpectedSummary|integer|false|none|An enumeration.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|ChartExpectedSummary|0|
+|ChartExpectedSummary|1|
+|ChartExpectedSummary|2|
+|ChartExpectedSummary|3|
+|ChartExpectedSummary|4|
+|ChartExpectedSummary|5|
+|ChartExpectedSummary|6|
+
+<h2 id="tocS_CreateSensorStateResponse">CreateSensorStateResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemacreatesensorstateresponse"></a>
+<a id="schema_CreateSensorStateResponse"></a>
+<a id="tocScreatesensorstateresponse"></a>
+<a id="tocscreatesensorstateresponse"></a>
+
+```json
+{
+  "client_cid": 0,
+  "info": "string",
+  "meter_eid": "string",
+  "meter_type_id": 0,
+  "meter_type_is_ami": true,
+  "meter_type_is_dcu": true,
+  "meter_type_name": "string",
+  "sensor_mid": 0,
+  "sensor_state_id": 0,
+  "signal_states": [
+    {}
+  ],
+  "since": 0,
+  "till": 0
+}
+
+```
+
+CreateSensorStateResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|client_cid|integer|false|none|none|
+|info|string|false|none|none|
+|meter_eid|string|false|none|none|
+|meter_type_id|integer|false|none|none|
+|meter_type_is_ami|boolean|false|none|none|
+|meter_type_is_dcu|boolean|false|none|none|
+|meter_type_name|string|false|none|none|
+|sensor_mid|integer|false|none|none|
+|sensor_state_id|integer|false|none|none|
+|signal_states|[object]|false|none|none|
+|since|integer|false|none|none|
+|till|integer|false|none|none|
+
+<h2 id="tocS_DataModelType">DataModelType</h2>
+<!-- backwards compatibility -->
+<a id="schemadatamodeltype"></a>
+<a id="schema_DataModelType"></a>
+<a id="tocSdatamodeltype"></a>
+<a id="tocsdatamodeltype"></a>
+
+```json
+0
+
+```
+
+DataModelType
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|DataModelType|integer|false|none|An enumeration.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|DataModelType|0|
+|DataModelType|1|
+|DataModelType|2|
+|DataModelType|3|
+|DataModelType|4|
+|DataModelType|5|
+|DataModelType|6|
+|DataModelType|7|
+|DataModelType|8|
+|DataModelType|9|
+|DataModelType|10|
 
 <h2 id="tocS_GetSignalRequest">GetSignalRequest</h2>
 <!-- backwards compatibility -->
@@ -2397,6 +2735,90 @@ GetSignalRequest
 |last_acq|boolean|false|none|none|
 |delta_t|integer|false|none|none|
 |output_unit_id|integer|false|none|none|
+
+<h2 id="tocS_GetTokenRequest">GetTokenRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemagettokenrequest"></a>
+<a id="schema_GetTokenRequest"></a>
+<a id="tocSgettokenrequest"></a>
+<a id="tocsgettokenrequest"></a>
+
+```json
+{
+  "login": "string",
+  "password": "string"
+}
+
+```
+
+GetTokenRequest
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|login|string|true|none|none|
+|password|string|true|none|none|
+
+<h2 id="tocS_InvalidCredentialsErrorResponse">InvalidCredentialsErrorResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemainvalidcredentialserrorresponse"></a>
+<a id="schema_InvalidCredentialsErrorResponse"></a>
+<a id="tocSinvalidcredentialserrorresponse"></a>
+<a id="tocsinvalidcredentialserrorresponse"></a>
+
+```json
+{
+  "detail": "string"
+}
+
+```
+
+InvalidCredentialsErrorResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|detail|string|true|none|none|
+
+<h2 id="tocS_MeterTypeRequest">MeterTypeRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemametertyperequest"></a>
+<a id="schema_MeterTypeRequest"></a>
+<a id="tocSmetertyperequest"></a>
+<a id="tocsmetertyperequest"></a>
+
+```json
+{
+  "name": "meter type name",
+  "description": "meter type description",
+  "number_of_phases": 1,
+  "is_balance": true,
+  "is_ami": false,
+  "is_dcu": false,
+  "is_remote": false,
+  "prefix_name": "prefix name",
+  "default_cap_period": 1
+}
+
+```
+
+MeterTypeRequest
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|none|
+|description|string|false|none|none|
+|number_of_phases|integer|true|none|none|
+|is_balance|boolean|false|none|none|
+|is_ami|boolean|false|none|none|
+|is_dcu|boolean|false|none|none|
+|is_remote|boolean|false|none|none|
+|prefix_name|string|false|none|none|
+|default_cap_period|integer|false|none|none|
 
 <h2 id="tocS_MeterTypeResponse">MeterTypeResponse</h2>
 <!-- backwards compatibility -->
@@ -2487,6 +2909,208 @@ PutMultipleSignalsRequest
 |signal_type_moid|integer|true|none|none|
 |unit|string|false|none|none|
 
+<h2 id="tocS_PutSensorRequest">PutSensorRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemaputsensorrequest"></a>
+<a id="schema_PutSensorRequest"></a>
+<a id="tocSputsensorrequest"></a>
+<a id="tocsputsensorrequest"></a>
+
+```json
+{
+  "name": "string",
+  "sensor_type_id": 0,
+  "sensor_eid": "string",
+  "lat": -90,
+  "lon": -180,
+  "info": "string",
+  "comments": "string",
+  "uncertain": true,
+  "negligible": true,
+  "balance_calculation": true,
+  "node_id": 0
+}
+
+```
+
+PutSensorRequest
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|none|
+|sensor_type_id|integer|true|none|none|
+|sensor_eid|string|false|none|none|
+|lat|number|false|none|none|
+|lon|number|false|none|none|
+|info|string|false|none|none|
+|comments|string|false|none|none|
+|uncertain|boolean|false|none|none|
+|negligible|boolean|false|none|none|
+|balance_calculation|boolean|false|none|none|
+|node_id|integer|false|none|none|
+
+<h2 id="tocS_PutSignalRequest">PutSignalRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemaputsignalrequest"></a>
+<a id="schema_PutSignalRequest"></a>
+<a id="tocSputsignalrequest"></a>
+<a id="tocsputsignalrequest"></a>
+
+```json
+{
+  "data": {
+    "time": [
+      1750222800000,
+      1750258800000
+    ],
+    "value": [
+      0,
+      0
+    ],
+    "type": [
+      "RM",
+      "DBL"
+    ],
+    "origin": [
+      1,
+      1
+    ]
+  }
+}
+
+```
+
+PutSignalRequest
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|object|true|none|Data to upload. Special value type 'RM' can be used to instead delete data.|
+
+<h2 id="tocS_SchemaModel">SchemaModel</h2>
+<!-- backwards compatibility -->
+<a id="schemaschemamodel"></a>
+<a id="schema_SchemaModel"></a>
+<a id="tocSschemamodel"></a>
+<a id="tocsschemamodel"></a>
+
+```json
+{}
+
+```
+
+SchemaModel
+
+### Properties
+
+*None*
+
+<h2 id="tocS_SensorIdResponse">SensorIdResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemasensoridresponse"></a>
+<a id="schema_SensorIdResponse"></a>
+<a id="tocSsensoridresponse"></a>
+<a id="tocssensoridresponse"></a>
+
+```json
+{
+  "client_cid": 0,
+  "sensor_mid": 0
+}
+
+```
+
+SensorIdResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|client_cid|integer|true|none|none|
+|sensor_mid|integer|true|none|none|
+
+<h2 id="tocS_SensorInfoResponse">SensorInfoResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemasensorinforesponse"></a>
+<a id="schema_SensorInfoResponse"></a>
+<a id="tocSsensorinforesponse"></a>
+<a id="tocssensorinforesponse"></a>
+
+```json
+{
+  "client_cid": 0,
+  "sensor_mid": 0,
+  "sensor_type_id": 0,
+  "name": "string",
+  "sensor_eid": "string",
+  "lat": 0,
+  "lon": 0,
+  "info": "string",
+  "comments": "string",
+  "negligible": true,
+  "uncertain": true,
+  "balance_calculation": true,
+  "acq_min": 0,
+  "sensor_type_name": "string",
+  "sensor_type_description": "string",
+  "sensor_type_sensor_state_custom_fields": "string",
+  "sensor_type_sensor_custom_fields": "string",
+  "write": true,
+  "read": true,
+  "execute": true,
+  "existing_sensor_state": true
+}
+
+```
+
+SensorInfoResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|client_cid|integer|true|none|none|
+|sensor_mid|integer|true|none|none|
+|sensor_type_id|integer|false|none|none|
+|name|string|false|none|none|
+|sensor_eid|string|false|none|none|
+|lat|number|false|none|none|
+|lon|number|false|none|none|
+|info|any|false|none|none|
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|string|false|none|none|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[SchemaModel](#schemaschemamodel)|false|none|Base model for dynamically created model from db schemas|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|comments|string|false|none|none|
+|negligible|boolean|false|none|none|
+|uncertain|boolean|false|none|none|
+|balance_calculation|boolean|false|none|none|
+|acq_min|number|false|none|none|
+|sensor_type_name|string|false|none|none|
+|sensor_type_description|string|false|none|none|
+|sensor_type_sensor_state_custom_fields|string|false|none|none|
+|sensor_type_sensor_custom_fields|string|false|none|none|
+|write|boolean|false|none|none|
+|read|boolean|false|none|none|
+|execute|boolean|false|none|none|
+|existing_sensor_state|boolean|false|none|none|
+
 <h2 id="tocS_SensorStateResponse">SensorStateResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemasensorstateresponse"></a>
@@ -2507,7 +3131,14 @@ PutMultipleSignalsRequest
   "meter_type_name": "string",
   "meter_type_is_ami": true,
   "meter_type_is_dcu": true,
-  "signal_states": []
+  "signal_states": [
+    {
+      "signal_type_moid": 0,
+      "value_for_since": 0,
+      "value_for_till": 0,
+      "signal_state_id": 0
+    }
+  ]
 }
 
 ```
@@ -2536,7 +3167,7 @@ or
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[SchemaModel](#schemaschemamodel)|false|none|none|
+|» *anonymous*|[SchemaModel](#schemaschemamodel)|false|none|Base model for dynamically created model from db schemas|
 
 continued
 
@@ -2651,6 +3282,58 @@ SignalResponse
 |time_tstorage|number|false|none|none|
 |time_other|number|false|none|none|
 
+<h2 id="tocS_SignalStateDto">SignalStateDto</h2>
+<!-- backwards compatibility -->
+<a id="schemasignalstatedto"></a>
+<a id="schema_SignalStateDto"></a>
+<a id="tocSsignalstatedto"></a>
+<a id="tocssignalstatedto"></a>
+
+```json
+{
+  "signal_type_moid": 0,
+  "value_for_since": 0,
+  "value_for_till": 0,
+  "signal_state_id": 0
+}
+
+```
+
+SignalStateDto
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|signal_type_moid|integer|true|none|none|
+|value_for_since|number|false|none|none|
+|value_for_till|number|false|none|none|
+|signal_state_id|integer|true|none|none|
+
+<h2 id="tocS_SignalStatePartialUpdateDto">SignalStatePartialUpdateDto</h2>
+<!-- backwards compatibility -->
+<a id="schemasignalstatepartialupdatedto"></a>
+<a id="schema_SignalStatePartialUpdateDto"></a>
+<a id="tocSsignalstatepartialupdatedto"></a>
+<a id="tocssignalstatepartialupdatedto"></a>
+
+```json
+{
+  "value_for_since": 0,
+  "value_for_till": 0
+}
+
+```
+
+SignalStatePartialUpdateDto
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|value_for_since|number|false|none|Value for state start|
+|value_for_till|number|false|none|Value for state end|
+
 <h2 id="tocS_SignalTypeResponse">SignalTypeResponse</h2>
 <!-- backwards compatibility -->
 <a id="schemasignaltyperesponse"></a>
@@ -2664,7 +3347,7 @@ SignalResponse
   "symbol": "string",
   "description": "string",
   "is_measurement": true,
-  "time_series_type": null,
+  "time_series_type": 0,
   "apply_multiplier": true,
   "apply_current_ratio": true,
   "apply_voltage_ratio": true,
@@ -2676,8 +3359,10 @@ SignalResponse
   "unit_symbol": "string",
   "group_id": 0,
   "group": "string",
-  "data_model_type": null,
-  "chart_expected_summary": [],
+  "data_model_type": 0,
+  "chart_expected_summary": [
+    0
+  ],
   "columns": {},
   "payload_mapping": {}
 }
@@ -2694,7 +3379,7 @@ SignalTypeResponse
 |symbol|string|false|none|none|
 |description|string|false|none|none|
 |is_measurement|boolean|true|none|none|
-|time_series_type|[TimeSeriesType](#schematimeseriestype)|false|none|none|
+|time_series_type|[TimeSeriesType](#schematimeseriestype)|false|none|An enumeration.|
 |apply_multiplier|boolean|false|none|none|
 |apply_current_ratio|boolean|false|none|none|
 |apply_voltage_ratio|boolean|false|none|none|
@@ -2706,8 +3391,118 @@ SignalTypeResponse
 |unit_symbol|string|false|none|none|
 |group_id|integer|false|none|none|
 |group|string|false|none|none|
-|data_model_type|[DataModelType](#schemadatamodeltype)|false|none|none|
-|chart_expected_summary|[[ChartExpectedSummary](#schemachartexpectedsummary)]|false|none|none|
+|data_model_type|[DataModelType](#schemadatamodeltype)|false|none|An enumeration.|
+|chart_expected_summary|[[ChartExpectedSummary](#schemachartexpectedsummary)]|false|none|[An enumeration.]|
 |columns|object|false|none|none|
 |payload_mapping|object|false|none|none|
+
+<h2 id="tocS_StatesIDSignalResponse">StatesIDSignalResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemastatesidsignalresponse"></a>
+<a id="schema_StatesIDSignalResponse"></a>
+<a id="tocSstatesidsignalresponse"></a>
+<a id="tocsstatesidsignalresponse"></a>
+
+```json
+{
+  "info": "string",
+  "sensor_state_id": 0,
+  "signal_state_id": 0,
+  "signal_type_moid": 0,
+  "value_for_since": 0,
+  "value_for_till": 0
+}
+
+```
+
+StatesIDSignalResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|info|string|false|none|none|
+|sensor_state_id|integer|false|none|none|
+|signal_state_id|integer|false|none|none|
+|signal_type_moid|integer|false|none|none|
+|value_for_since|number|false|none|none|
+|value_for_till|number|false|none|none|
+
+<h2 id="tocS_TimeSeriesType">TimeSeriesType</h2>
+<!-- backwards compatibility -->
+<a id="schematimeseriestype"></a>
+<a id="schema_TimeSeriesType"></a>
+<a id="tocStimeseriestype"></a>
+<a id="tocstimeseriestype"></a>
+
+```json
+0
+
+```
+
+TimeSeriesType
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|TimeSeriesType|integer|false|none|An enumeration.|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|TimeSeriesType|0|
+|TimeSeriesType|1|
+|TimeSeriesType|2|
+
+<h2 id="tocS_UserTokenResponse">UserTokenResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemausertokenresponse"></a>
+<a id="schema_UserTokenResponse"></a>
+<a id="tocSusertokenresponse"></a>
+<a id="tocsusertokenresponse"></a>
+
+```json
+{
+  "user_id": 0,
+  "token": "string",
+  "expiration": 0,
+  "account_status": {}
+}
+
+```
+
+UserTokenResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|user_id|integer|true|none|none|
+|token|string|true|none|none|
+|expiration|number|true|none|none|
+|account_status|object|false|none|none|
+
+<h2 id="tocS_WeatherMidResponse">WeatherMidResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemaweathermidresponse"></a>
+<a id="schema_WeatherMidResponse"></a>
+<a id="tocSweathermidresponse"></a>
+<a id="tocsweathermidresponse"></a>
+
+```json
+{
+  "mid": 0
+}
+
+```
+
+WeatherMidResponse
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|mid|integer|true|none|none|
 
