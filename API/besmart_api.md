@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.64.28</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.65.10</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -13,106 +13,16 @@
 * API Key (APIKeyHeader)
     - Parameter Name: **X-Auth**, in: header. 
 
-<h1 id="besmart-rest-api-sensors">Sensors</h1>
+<h1 id="besmart-rest-api-estimation">Estimation</h1>
 
-## Get list of meter types
+## Run graph
 
-<a id="opIdapi_endpoints_sensors_get_meters_api_clients__client_cid__meters_get"></a>
-
-> Code samples
-
-```http
-GET /api/clients/{client_cid}/meters HTTP/1.1
-
-Accept: application/json
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('/api/clients/{client_cid}/meters', headers = headers)
-
-print(r.json())
-
-```
-
-`GET /api/clients/{client_cid}/meters`
-
-Using this endpoint client can get list of all meter types
-
-<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|client_cid|path|integer|true|Client cid|
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "name": "string",
-    "description": "string",
-    "number_of_phases": 0,
-    "is_balance": false,
-    "is_ami": false,
-    "is_dcu": false,
-    "is_remote": false,
-    "prefix_name": "string",
-    "default_cap_period": 0,
-    "client_cid": 0,
-    "id": 0
-  }
-]
-```
-
-<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-responses">Responses</h3>
-
-|Status|Meaning|Description|
-|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read meter types|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
-
-<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Description|
-|---|---|---|
-|» MeterTypeResponse|[MeterTypeResponse](#schemametertyperesponse)|none|
-|»» name|string|none|
-|»» description|string|none|
-|»» number_of_phases|integer|none|
-|»» is_balance|boolean|none|
-|»» is_ami|boolean|none|
-|»» is_dcu|boolean|none|
-|»» is_remote|boolean|none|
-|»» prefix_name|string|none|
-|»» default_cap_period|integer|none|
-|»» client_cid|integer|none|
-|»» id|integer|none|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-HTTPBearer
-</aside>
-
-## Create meter type
-
-<a id="opIdapi_endpoints_sensors_post_meter_api_clients__client_cid__meters_post"></a>
+<a id="opIdapi_endpoints_graph_post_api_tasks_graphs_run_name_post"></a>
 
 > Code samples
 
 ```http
-POST /api/clients/{client_cid}/meters HTTP/1.1
+POST /api/tasks/graphs/run/name?graph_name=string HTTP/1.1
 
 Content-Type: application/json
 Accept: application/json
@@ -127,212 +37,55 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('/api/clients/{client_cid}/meters', headers = headers)
-
-print(r.json())
-
-```
-
-`POST /api/clients/{client_cid}/meters`
-
-> Body parameter
-
-```json
-{
-  "name": "meter type name",
-  "description": "meter type description",
-  "number_of_phases": 1,
-  "is_balance": true,
-  "is_ami": false,
-  "is_dcu": false,
-  "is_remote": false,
-  "prefix_name": "prefix name",
-  "default_cap_period": 1
-}
-```
-
-<h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|client_cid|path|integer|true|Client cid|
-|body|body|[MeterTypeRequest](#schemametertyperequest)|true|none|
-|» name|body|string|true|none|
-|» description|body|string|false|none|
-|» number_of_phases|body|integer|true|none|
-|» is_balance|body|boolean|false|none|
-|» is_ami|body|boolean|false|none|
-|» is_dcu|body|boolean|false|none|
-|» is_remote|body|boolean|false|none|
-|» prefix_name|body|string|false|none|
-|» default_cap_period|body|integer|false|none|
-
-> Example responses
-
-> 201 Response
-
-```json
-{
-  "name": "string",
-  "description": "string",
-  "number_of_phases": 0,
-  "is_balance": false,
-  "is_ami": false,
-  "is_dcu": false,
-  "is_remote": false,
-  "prefix_name": "string",
-  "default_cap_period": 0,
-  "client_cid": 0,
-  "id": 0
-}
-```
-
-<h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-responses">Responses</h3>
-
-|Status|Meaning|Description|
-|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created meter type|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Sensor not found|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|There is another state in that period|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Date since is same or greater than date till|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-HTTPBearer
-</aside>
-
-## Update meter type
-
-<a id="opIdapi_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put"></a>
-
-> Code samples
-
-```http
-PUT /api/clients/{client_cid}/meters/{meter_type_id}?name=string&number_of_phases=0 HTTP/1.1
-
-Accept: application/json
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.put('/api/clients/{client_cid}/meters/{meter_type_id}', params={
-  'name': 'string',  'number_of_phases': '0'
+r = requests.post('/api/tasks/graphs/run/name', params={
+  'graph_name': 'string'
 }, headers = headers)
 
 print(r.json())
 
 ```
 
-`PUT /api/clients/{client_cid}/meters/{meter_type_id}`
+`POST /api/tasks/graphs/run/name`
 
-<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-parameters">Parameters</h3>
+> Body parameter
+
+```json
+null
+```
+
+<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|client_cid|path|integer|true|Client cid|
-|meter_type_id|path|integer|true|Meter type ID|
-|name|query|string|true|Meter type name|
-|number_of_phases|query|integer|true|Number of phases|
-|description|query|string|false|Description|
-|is_ami|query|boolean|false|Is ami meter|
-|is_dcu|query|boolean|false|Is dcu meter|
-|is_balance|query|boolean|false|Is balance meter|
-|is_remote|query|boolean|false|Is remotely accessible meter|
-|prefix_name|query|string|false|Prefix name|
-|default_cap_period|query|integer|false|Default capture period|
+|graph_name|query|string|true|Graph name|
+|since|query|integer|false|none|
+|till|query|integer|false|none|
+|body|body|any|true|none|
 
 > Example responses
 
-> 401 Response
+> 200 Response
 
 ```json
-{
-  "detail": "string"
-}
+null
 ```
 
-<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-responses">Responses</h3>
+<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-responses">Responses</h3>
 
 |Status|Meaning|Description|
 |---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated meter type|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully executed task|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
 
-<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-responseschema">Response Schema</h3>
+<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 HTTPBearer
 </aside>
 
-## Delete meter type
-
-<a id="opIdapi_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete"></a>
-
-> Code samples
-
-```http
-DELETE /api/clients/{client_cid}/meters/{meter_type_id} HTTP/1.1
-
-Accept: application/json
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.delete('/api/clients/{client_cid}/meters/{meter_type_id}', headers = headers)
-
-print(r.json())
-
-```
-
-`DELETE /api/clients/{client_cid}/meters/{meter_type_id}`
-
-<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|client_cid|path|integer|true|Client cid|
-|meter_type_id|path|integer|true|Meter type id|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "detail": "string"
-}
-```
-
-<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-responses">Responses</h3>
-
-|Status|Meaning|Description|
-|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully deleted meter type|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
-
-<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-responseschema">Response Schema</h3>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-HTTPBearer
-</aside>
+<h1 id="besmart-rest-api-sensors">Sensors</h1>
 
 ## Get list of sensor types
 
@@ -710,78 +463,6 @@ print(r.json())
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-HTTPBearer
-</aside>
-
-<h1 id="besmart-rest-api-estimation">Estimation</h1>
-
-## Run graph
-
-<a id="opIdapi_endpoints_graph_post_api_tasks_graphs_run_name_post"></a>
-
-> Code samples
-
-```http
-POST /api/tasks/graphs/run/name?graph_name=string HTTP/1.1
-
-Content-Type: application/json
-Accept: application/json
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('/api/tasks/graphs/run/name', params={
-  'graph_name': 'string'
-}, headers = headers)
-
-print(r.json())
-
-```
-
-`POST /api/tasks/graphs/run/name`
-
-> Body parameter
-
-```json
-null
-```
-
-<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|graph_name|query|string|true|Graph name|
-|since|query|integer|false|none|
-|till|query|integer|false|none|
-|body|body|any|true|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-null
-```
-
-<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-responses">Responses</h3>
-
-|Status|Meaning|Description|
-|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully executed task|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
-|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
-
-<h3 id="api_endpoints_graph_post_api_tasks_graphs_run_name_post-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -2577,6 +2258,327 @@ print(r.json())
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully returned sensor mid|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Unprocessable entity|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
+</aside>
+
+<h1 id="besmart-rest-api-meter-types">Meter types</h1>
+
+## Get list of meter types
+
+<a id="opIdapi_endpoints_sensors_get_meters_api_clients__client_cid__meters_get"></a>
+
+> Code samples
+
+```http
+GET /api/clients/{client_cid}/meters HTTP/1.1
+
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/api/clients/{client_cid}/meters', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /api/clients/{client_cid}/meters`
+
+Using this endpoint client can get list of all meter types
+
+<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client cid|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "name": "string",
+    "description": "string",
+    "number_of_phases": 0,
+    "is_balance": false,
+    "is_ami": false,
+    "is_dcu": false,
+    "is_remote": false,
+    "prefix_name": "string",
+    "default_cap_period": 0,
+    "client_cid": 0,
+    "id": 0
+  }
+]
+```
+
+<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successfully read meter types|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
+
+<h3 id="api_endpoints_sensors_get_meters_api_clients__client_cid__meters_get-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Description|
+|---|---|---|
+|» MeterTypeResponse|[MeterTypeResponse](#schemametertyperesponse)|none|
+|»» name|string|none|
+|»» description|string|none|
+|»» number_of_phases|integer|none|
+|»» is_balance|boolean|none|
+|»» is_ami|boolean|none|
+|»» is_dcu|boolean|none|
+|»» is_remote|boolean|none|
+|»» prefix_name|string|none|
+|»» default_cap_period|integer|none|
+|»» client_cid|integer|none|
+|»» id|integer|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
+</aside>
+
+## Create meter type
+
+<a id="opIdapi_endpoints_sensors_post_meter_api_clients__client_cid__meters_post"></a>
+
+> Code samples
+
+```http
+POST /api/clients/{client_cid}/meters HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/api/clients/{client_cid}/meters', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /api/clients/{client_cid}/meters`
+
+> Body parameter
+
+```json
+{
+  "name": "meter type name",
+  "description": "meter type description",
+  "number_of_phases": 1,
+  "is_balance": true,
+  "is_ami": false,
+  "is_dcu": false,
+  "is_remote": false,
+  "prefix_name": "prefix name",
+  "default_cap_period": 1
+}
+```
+
+<h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client cid|
+|body|body|[MeterTypeRequest](#schemametertyperequest)|true|none|
+|» name|body|string|true|none|
+|» description|body|string|false|none|
+|» number_of_phases|body|integer|true|none|
+|» is_balance|body|boolean|false|none|
+|» is_ami|body|boolean|false|none|
+|» is_dcu|body|boolean|false|none|
+|» is_remote|body|boolean|false|none|
+|» prefix_name|body|string|false|none|
+|» default_cap_period|body|integer|false|none|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "name": "string",
+  "description": "string",
+  "number_of_phases": 0,
+  "is_balance": false,
+  "is_ami": false,
+  "is_dcu": false,
+  "is_remote": false,
+  "prefix_name": "string",
+  "default_cap_period": 0,
+  "client_cid": 0,
+  "id": 0
+}
+```
+
+<h3 id="api_endpoints_sensors_post_meter_api_clients__client_cid__meters_post-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Successfully created meter type|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Sensor not found|
+|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|There is another state in that period|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Date since is same or greater than date till|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
+</aside>
+
+## Update meter type
+
+<a id="opIdapi_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put"></a>
+
+> Code samples
+
+```http
+PUT /api/clients/{client_cid}/meters/{meter_type_id}?name=string&number_of_phases=0 HTTP/1.1
+
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/api/clients/{client_cid}/meters/{meter_type_id}', params={
+  'name': 'string',  'number_of_phases': '0'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`PUT /api/clients/{client_cid}/meters/{meter_type_id}`
+
+<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client cid|
+|meter_type_id|path|integer|true|Meter type ID|
+|name|query|string|true|Meter type name|
+|number_of_phases|query|integer|true|Number of phases|
+|description|query|string|false|Description|
+|is_ami|query|boolean|false|Is ami meter|
+|is_dcu|query|boolean|false|Is dcu meter|
+|is_balance|query|boolean|false|Is balance meter|
+|is_remote|query|boolean|false|Is remotely accessible meter|
+|prefix_name|query|string|false|Prefix name|
+|default_cap_period|query|integer|false|Default capture period|
+
+> Example responses
+
+> 401 Response
+
+```json
+{
+  "detail": "string"
+}
+```
+
+<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully updated meter type|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
+
+<h3 id="api_endpoints_sensors_put_meter_api_clients__client_cid__meters__meter_type_id__put-responseschema">Response Schema</h3>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBearer
+</aside>
+
+## Delete meter type
+
+<a id="opIdapi_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete"></a>
+
+> Code samples
+
+```http
+DELETE /api/clients/{client_cid}/meters/{meter_type_id} HTTP/1.1
+
+Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/api/clients/{client_cid}/meters/{meter_type_id}', headers = headers)
+
+print(r.json())
+
+```
+
+`DELETE /api/clients/{client_cid}/meters/{meter_type_id}`
+
+<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|client_cid|path|integer|true|Client cid|
+|meter_type_id|path|integer|true|Meter type id|
+
+> Example responses
+
+> 401 Response
+
+```json
+{
+  "detail": "string"
+}
+```
+
+<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-responses">Responses</h3>
+
+|Status|Meaning|Description|
+|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Successfully deleted meter type|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Not valid authentication credentials|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|
+
+<h3 id="api_endpoints_sensors_delete_meter_api_clients__client_cid__meters__meter_type_id__delete-responseschema">Response Schema</h3>
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
