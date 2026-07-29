@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="besmart-rest-api">besmart REST API v0.66.11</h1>
+<h1 id="besmart-rest-api">besmart REST API v0.67.26</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
@@ -280,13 +280,13 @@ print(r.json())
 {
   "name": "string",
   "sensor_type_id": 0,
+  "negligible": true,
   "sensor_eid": "string",
   "lat": -90,
   "lon": -180,
   "info": "string",
   "comments": "string",
   "uncertain": true,
-  "negligible": true,
   "balance_calculation": true,
   "node_id": 0
 }
@@ -299,15 +299,15 @@ print(r.json())
 |client_cid|path|integer|true|Client CID|
 |sensor_mid|path|integer|true|Sensor MID|
 |body|body|[PutSensorRequest](#schemaputsensorrequest)|true|none|
-|» name|body|string|true|none|
+|» name|body|string|false|none|
 |» sensor_type_id|body|integer|true|none|
+|» negligible|body|boolean|true|none|
 |» sensor_eid|body|string|false|none|
 |» lat|body|number|false|none|
 |» lon|body|number|false|none|
 |» info|body|string|false|none|
 |» comments|body|string|false|none|
 |» uncertain|body|boolean|false|none|
-|» negligible|body|boolean|false|none|
 |» balance_calculation|body|boolean|false|none|
 |» node_id|body|integer|false|none|
 
@@ -2922,13 +2922,13 @@ PutMultipleSignalsRequest
 {
   "name": "string",
   "sensor_type_id": 0,
+  "negligible": true,
   "sensor_eid": "string",
   "lat": -90,
   "lon": -180,
   "info": "string",
   "comments": "string",
   "uncertain": true,
-  "negligible": true,
   "balance_calculation": true,
   "node_id": 0
 }
@@ -2941,15 +2941,15 @@ PutSensorRequest
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
+|name|string|false|none|none|
 |sensor_type_id|integer|true|none|none|
+|negligible|boolean|true|none|none|
 |sensor_eid|string|false|none|none|
 |lat|number|false|none|none|
 |lon|number|false|none|none|
 |info|string|false|none|none|
 |comments|string|false|none|none|
 |uncertain|boolean|false|none|none|
-|negligible|boolean|false|none|none|
 |balance_calculation|boolean|false|none|none|
 |node_id|integer|false|none|none|
 
